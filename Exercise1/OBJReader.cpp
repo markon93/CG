@@ -37,7 +37,6 @@ void formatData(string filename){
   vector <vector<float>> vertices, normals, textures;
   vector <vector<string>> faces;
 
-  bool triangulationExists = false;
 	string line;
 	if (data.is_open()) {
 		while (getline(data, line)) {
@@ -57,8 +56,6 @@ void formatData(string filename){
         }
       }
       else if(tag == 'f'){
-        triangulationExists = true;
-        // Handle this case separately
         line = line.substr(1, line.size());
         faces.push_back(getStrings(line));
       }
@@ -70,18 +67,7 @@ void formatData(string filename){
     exit(1);
   }
 
-  if(! triangulationExists){
-    // Create your own triangulation
-    cout << "Oh no!!\n";
-  }
-
-  // Normalizeing the object?
-
-  cout << vertices.size() << endl;
-  cout << normals.size() << endl;
-  cout << faces.size() << endl;
-  cout << textures.size() << endl;
-
+  // Normalizing the object?
   for (std::vector<vector<float>>::iterator it1 = vertices.begin() ; it1 != vertices.end(); ++it1){
     vector<float> row = *it1;
     for (std::vector<float>::iterator it2 = row.begin() ; it2 != row.end(); ++it2){
