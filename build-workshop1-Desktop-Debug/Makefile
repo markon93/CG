@@ -50,10 +50,12 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Workshop1/openglwindow.cpp \
 		../Workshop1/geometryrender.cpp \
-		../Workshop1/main.cpp moc_openglwindow.cpp
+		../Workshop1/main.cpp \
+		../Workshop1/objfilereader.cpp moc_openglwindow.cpp
 OBJECTS       = openglwindow.o \
 		geometryrender.o \
 		main.o \
+		objfilereader.o \
 		moc_openglwindow.o
 DIST          = ../Workshop1/vshader.glsl \
 		../Workshop1/fshader.glsl \
@@ -120,9 +122,11 @@ DIST          = ../Workshop1/vshader.glsl \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../Workshop1/workshop1.pro ../Workshop1/openglwindow.h \
 		../Workshop1/geometryrender.h \
-		../Workshop1/3dstudio.h ../Workshop1/openglwindow.cpp \
+		../Workshop1/3dstudio.h \
+		../Workshop1/objfilereader.h ../Workshop1/openglwindow.cpp \
 		../Workshop1/geometryrender.cpp \
-		../Workshop1/main.cpp
+		../Workshop1/main.cpp \
+		../Workshop1/objfilereader.cpp
 QMAKE_TARGET  = Workshop1
 DESTDIR       = 
 TARGET        = Workshop1
@@ -279,8 +283,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Workshop1/openglwindow.h ../Workshop1/geometryrender.h ../Workshop1/3dstudio.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Workshop1/openglwindow.cpp ../Workshop1/geometryrender.cpp ../Workshop1/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Workshop1/openglwindow.h ../Workshop1/geometryrender.h ../Workshop1/3dstudio.h ../Workshop1/objfilereader.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Workshop1/openglwindow.cpp ../Workshop1/geometryrender.cpp ../Workshop1/main.cpp ../Workshop1/objfilereader.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -338,8 +342,12 @@ geometryrender.o: ../Workshop1/geometryrender.cpp ../Workshop1/geometryrender.h 
 
 main.o: ../Workshop1/main.cpp ../Workshop1/geometryrender.h \
 		../Workshop1/3dstudio.h \
-		../Workshop1/openglwindow.h
+		../Workshop1/openglwindow.h \
+		../Workshop1/objfilereader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Workshop1/main.cpp
+
+objfilereader.o: ../Workshop1/objfilereader.cpp ../Workshop1/objfilereader.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objfilereader.o ../Workshop1/objfilereader.cpp
 
 moc_openglwindow.o: moc_openglwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_openglwindow.o moc_openglwindow.cpp

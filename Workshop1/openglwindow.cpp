@@ -14,19 +14,16 @@
 using namespace std;
 
 OpenGLWindow::OpenGLWindow(QWindow *parent)
-    : QWindow(parent)
-{
+    : QWindow(parent){
     setSurfaceType(QWindow::OpenGLSurface);
 }
 
-void OpenGLWindow::display(QPainter *painter)
-{
+void OpenGLWindow::display(QPainter *painter){
     Q_UNUSED(painter);
 }
 
 // Initialize OpenGL context and viewport.
-void OpenGLWindow::initialize()
-{
+void OpenGLWindow::initialize(){
     context = unique_ptr<QOpenGLContext>{new QOpenGLContext(this)};
 
     context->setFormat(requestedFormat());
@@ -36,7 +33,6 @@ void OpenGLWindow::initialize()
     }
 
     context->makeCurrent(this);
-
     initializeOpenGLFunctions();
 
     /* Set graphics attributes */
@@ -50,8 +46,7 @@ void OpenGLWindow::initialize()
 }
 
 // Initialize OpenGL shader program
-unique_ptr<QOpenGLShaderProgram> OpenGLWindow::initProgram(QObject *parent, const QString &vShaderFile, const QString &fShaderFile) const
-{
+unique_ptr<QOpenGLShaderProgram> OpenGLWindow::initProgram(QObject *parent, const QString &vShaderFile, const QString &fShaderFile) const{
     // Create a shader program
     // Corresponds to the GL call glCreateProgram()
     unique_ptr<QOpenGLShaderProgram> program = unique_ptr<QOpenGLShaderProgram>{new QOpenGLShaderProgram(parent)};
@@ -82,8 +77,7 @@ unique_ptr<QOpenGLShaderProgram> OpenGLWindow::initProgram(QObject *parent, cons
 
 // Render the scene using QPainter.
 // This should be overriden in a sub-class.
-void OpenGLWindow::display()
-{
+void OpenGLWindow::display(){
     if (!device)
         device = make_shared<QOpenGLPaintDevice>();
 
@@ -95,16 +89,14 @@ void OpenGLWindow::display()
     display(&painter);
 }
 
-void reshape(void)
-{
+void reshape(void){
     GLint viewportParams[4];
     glGetIntegerv(GL_VIEWPORT, viewportParams);
-    glViewport(0,0,viewportParams[2],viewportParams[3]);
+    glViewport(0, 0, viewportParams[2], viewportParams[3]);
 }
 
 // The window event handler
-bool OpenGLWindow::event(QEvent *event)
-{
+bool OpenGLWindow::event(QEvent *event){
     switch (event->type()) {
     case QEvent::Close:
         // Terminate application if window is closed
@@ -117,8 +109,7 @@ bool OpenGLWindow::event(QEvent *event)
 }
 
 // Called when the window is exposed
-void OpenGLWindow::exposeEvent(QExposeEvent *event)
-{
+void OpenGLWindow::exposeEvent(QExposeEvent *event){
     Q_UNUSED(event);
 
     if (isExposed())
@@ -126,8 +117,7 @@ void OpenGLWindow::exposeEvent(QExposeEvent *event)
 }
 
 // Render the scene if the window is exposed (shown)
-void OpenGLWindow::displayNow()
-{
+void OpenGLWindow::displayNow(){
     if (!isExposed() || !context)
         return;
 

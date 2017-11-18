@@ -16,12 +16,14 @@ TEMPLATE = app
 SOURCES +=\
     openglwindow.cpp \
     geometryrender.cpp \
-    main.cpp
+    main.cpp \
+    objfilereader.cpp
 
 HEADERS  += \
     openglwindow.h \
     geometryrender.h \
-    3dstudio.h
+    3dstudio.h \
+    objfilereader.h
 
 FORMS    +=
 

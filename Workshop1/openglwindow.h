@@ -9,7 +9,6 @@
 #include <QWindow>
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
-
 #include "3dstudio.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))

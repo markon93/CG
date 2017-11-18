@@ -13,8 +13,8 @@
 #include "3dstudio.h"
 #include "openglwindow.h"
 
-using VertVec = QVector2D;
-
+//using VertVec = QVector2D;
+using VertVec = QVector3D;
 class GeometryRender : public OpenGLWindow
 {
 public:
@@ -35,10 +35,12 @@ private:
 
     // OpenGL attribute locations
     GLuint locVertices;
+    GLuint locModel;
 
     // Geometry data
     std::vector<VertVec> vertices;
 
-    void loadGeometry(void);
+    void update(void);
+    void loadGeometry(std::string filename);
 };
 

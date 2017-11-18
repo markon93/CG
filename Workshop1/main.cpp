@@ -3,8 +3,7 @@
 
 #include "geometryrender.h"
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     QApplication app(argc, argv);
 
     // Create the OpenGL window
@@ -22,4 +21,6 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
+
+
 

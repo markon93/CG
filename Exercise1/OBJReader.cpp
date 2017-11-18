@@ -81,14 +81,3 @@ int main(){
   string filename = "cube.obj.txt";
 	formatData(filename);
 }
-
-
-
-
-
-
-
-
-
-
-//
