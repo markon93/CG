@@ -92,13 +92,15 @@ QVector<float> OBJFileReader::normalizeVec(QVector<float> vec){
     scale = sqrt(scale);
 
     for(it = vec.begin(); it != vec.end(); it++){
-        *it = *it/scale;
+        if(scale > 0){
+            *it = *it/scale;
+        }
     }
     return vec;
 }
 
 /* Make a simple triangulation of vertex data */
-QVector<QVector<float>> triangulate(QVector<QVector<float>> verticeData){
+QVector<QVector<float>> OBJFileReader::triangulate(QVector<QVector<float>> verticeData){
     QVector<QVector<float>> triangulation;
     QVector<QVector<float>>::iterator i;
     QVector<QVector<float>>::iterator j;
@@ -116,10 +118,39 @@ QVector<QVector<float>> triangulate(QVector<QVector<float>> verticeData){
     return triangulation;
 }
 
+/* Center the vertices at the origin */
+QVector<QVector<float>> OBJFileReader::centerVertices(QVector<QVector<float>> vertexList){
+    double sumX = 0.0, sumY = 0.0, sumZ = 0.0;
+    QVector<QVector<float>>::iterator it;
+    for(it = vertexList.begin(); it != vertexList.end(); it++){
+
+        QVector<float> row = *it;
+        QVector<float>::iterator it2;
+        for(it2 = row.begin(); it2 != row.end(); it2++){
+            sumX += row[0];
+            sumY += row[1];
+            sumZ += row[2];
+        }
+    }
+    double aveX = sumX/(3*vertexList.size());
+    double aveY = sumY/(3*vertexList.size());
+    double aveZ = sumZ/(3*vertexList.size());
+
+    for(int i = 0; i < vertexList.size(); i++){
+        vertexList[i][0] -= aveX;
+        vertexList[i][1] -= aveY;
+        vertexList[i][2] -= aveZ;
+    }
+    return vertexList;
+}
+
 
 /* Puts the vertex-, face- and texture data from a file in vectors. */
 bool OBJFileReader::formatData(string filename){
     bool fGiven = false;
+    vertexList.clear();
+    vertices.clear();
+    faces.clear();
     ifstream data(filename);
     string line;
     if(data.is_open()){
@@ -140,6 +171,9 @@ bool OBJFileReader::formatData(string filename){
                 }
             }
         }
+
+        // Center the vertices at the origin
+        vertexList = centerVertices(vertexList);
 
         // Use face data to calculate triangulation if it is given
         QVector<QVector<string>>::iterator it;

@@ -56,7 +56,7 @@ void GeometryRender::initialize(){
 
     vao.release();
     program->release();
-    loadGeometry("suzanne.obj");
+    loadGeometry("pyramid.obj");
 }
 
 // Update the model matrix
@@ -100,7 +100,8 @@ void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
         break;
     case Qt::Key_O:
         filename = reader->getUserInput("Enter filename: ");
-        //Reset transformations etc
+        //Reset transformations
+        matModel.setToIdentity();
         loadGeometry(filename);
         break;
     default:
@@ -119,8 +120,6 @@ void GeometryRender::loadGeometry(string filename){
         QVector<float> row = *it;
         vertices.push_back(VertVec(row[0],row[1],row[2]));
     }
-
-
     program->bind();
     vao.bind();
 

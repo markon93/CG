@@ -15,6 +15,8 @@ private:
     QVector<std::string> getStrings(std::string line);
     QVector<std::string> parseFaceString(std::string str);
     QVector<float> normalizeVec(QVector<float> vec);
+    QVector<QVector<float>> centerVertices(QVector<QVector<float>> vertexList);
+    QVector<QVector<float>> triangulate(QVector<QVector<float>> verticeData);
 };
 
 #endif
