@@ -15,15 +15,22 @@ using namespace std;
 GeometryRender::GeometryRender()
     : vao(0)
     , vBuffer(QOpenGLBuffer::VertexBuffer){
+//    , iBuffer(QOpenGLBuffer::IndexBuffer){
 }
 
-QMatrix4x4 matModel;
-string filename;
-OBJFileReader* reader = new OBJFileReader();
+/* Get user input.
+    - prompt: Message to the user with what to enter.
+    - returns: The string that the user entered.
+*/
+string GeometryRender::getUserInput(string prompt){
+    cout << prompt;
+    string input;
+    cin >> input;
+    return input;
+}
 
 // Initialize OpenGL
 void GeometryRender::initialize(){
-
     OpenGLWindow::initialize();
 
     // Enable depth test
@@ -56,15 +63,18 @@ void GeometryRender::initialize(){
 
     vao.release();
     program->release();
-    loadGeometry("pyramid.obj");
+
+    // Default object is a cube
+    Object3D* defaultObj = new Object3D();
+    loadGeometry(defaultObj);
 }
 
 // Update the model matrix
-void GeometryRender::update(Object3D *obj){
+void GeometryRender::update(Object3D* obj){
     program->bind();
     vao.bind();
 
-    program->setUniformValue(locModel, obj.matModel);
+    program->setUniformValue(locModel, obj->matModel);
     OpenGLWindow::displayNow();
 
     vao.release();
@@ -72,7 +82,7 @@ void GeometryRender::update(Object3D *obj){
 }
 
 // Handle keyboard events
-void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
+/*void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
     switch (keyEvent->key()){
     case Qt::Key_Left:
         matModel.rotate(-10.0, 0.0, 1.0, 0.0);
@@ -99,7 +109,7 @@ void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
         matModel.translate(-0.1,0.0);
         break;
     case Qt::Key_O:
-        filename = reader->getUserInput("Enter filename: ");
+        filename = getUserInput("Enter filename: ");
         //Reset transformations
         matModel.setToIdentity();
         loadGeometry(filename);
@@ -110,16 +120,9 @@ void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
     }
     update();
 }
+*/
 
-void GeometryRender::loadGeometry(string filename){
-    reader -> formatData(filename);
-    QVector<QVector<float>> vertexList = reader -> getVertices();
-
-    // Define vertices in array
-    for (QVector<QVector<float>>::iterator it = vertexList.begin() ; it != vertexList.end(); ++it){
-        QVector<float> row = *it;
-        vertices.push_back(VertVec(row[0],row[1],row[2]));
-    }
+void GeometryRender::loadGeometry(Object3D* obj){
     program->bind();
     vao.bind();
 
@@ -128,7 +131,9 @@ void GeometryRender::loadGeometry(string filename){
     glVertexAttribPointer(locVertices, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(0));
     glEnableVertexAttribArray(locVertices);
 
-    program->setUniformValue(locModel, matModel);
+    program->setUniformValue(locModel, obj->matModel);
+
+    vertices = obj->getVertices();
 
     // Load data to the array buffer
     // Corresponds to the GL call glBufferData()

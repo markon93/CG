@@ -7,22 +7,8 @@
 using namespace std;
 #include "objfilereader.h"
 
-OBJFileReader::OBJFileReader(){
-
-}
-
-vector<vector<float>> vertexList, vertices, normals, textures;
-vector<vector<string>> faces;
-
-/* Get user input.
-    - prompt: Message to the user with what to enter.
-    - returns: The string that the user entered.
-*/
-string OBJFileReader::getUserInput(string prompt){
-    cout << prompt;
-    string input;
-    cin >> input;
-    return input;
+OBJFileReader::OBJFileReader(string filename){
+    this->filename = filename;
 }
 
 /* Returns a vector with floats from a string where they are separated by spaces. */
@@ -38,8 +24,7 @@ vector<float> OBJFileReader::getFloats(string line){
     return values;
 }
 
-/* Takes a string on the form x/y/z (y and/or z not mandatory) and return a vector on the form [x, y, z].
-*/
+/* Takes a string on the form x/y/z (y and/or z not mandatory) and return a vector on the form [x, y, z]. */
 vector<string> OBJFileReader::parseFaceString(string str){
     string vertexIndex = "", textureIndex = "", normalIndex = "";
 
@@ -136,7 +121,7 @@ vector<vector<float>> OBJFileReader::centerVertices(vector<vector<float>> vertex
     double aveY = sumY/(3*vertexList.size());
     double aveZ = sumZ/(3*vertexList.size());
 
-    for(int i = 0; i < vertexList.size(); i++){
+    for(int i = 0; i < (int) vertexList.size(); i++){
         vertexList[i][0] -= aveX;
         vertexList[i][1] -= aveY;
         vertexList[i][2] -= aveZ;
@@ -144,13 +129,9 @@ vector<vector<float>> OBJFileReader::centerVertices(vector<vector<float>> vertex
     return vertexList;
 }
 
-
 /* Puts the vertex-, face- and texture data from a file in vectors. */
 bool OBJFileReader::formatData(){
     bool fGiven = false;
-    vertexList.clear();
-    vertices.clear();
-    faces.clear();
     ifstream data(filename);
     string line;
     if(data.is_open()){
@@ -175,7 +156,7 @@ bool OBJFileReader::formatData(){
         // Center the vertices at the origin
         vertexList = centerVertices(vertexList);
 
-        // Use face data to calculate triangulation if it is given
+        // Use face data to calculate triangulation if it is given, else make one manually
         vector<vector<string>>::iterator it;
         if(fGiven){
             for(it = faces.begin(); it != faces.end(); it++){
