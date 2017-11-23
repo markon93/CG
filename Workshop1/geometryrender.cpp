@@ -120,6 +120,9 @@ void GeometryRender::loadGeometry(string filename){
         vertices.push_back(VertVec(row[0],row[1],row[2]));
     }
 
+    cout <<endl;
+    cout << "Vertices" << endl << endl;
+
 
     program->bind();
     vao.bind();

@@ -5,7 +5,7 @@
 using namespace std;
 
 Object3D::Object3D(){
-    filename = "cube.obj";
+    filename = "cube_brick.obj";
     this->initialize();
 }
 
@@ -17,12 +17,24 @@ Object3D::Object3D(string filename){
 /* Create object data according to the data in the user supplied file */
 void Object3D::initialize(){
     reader = new OBJFileReader(filename);
+    vertexIndices = reader->getVertexIndices();
     vertices = reader->getVertices();
+    triangulation = reader->getTriangulation();
 }
 
 /* Returns: the vertices of the object */
 vector<vector<float>> Object3D::getVertices(){
     return vertices;
+}
+
+/* Returns: The indices of the object's vertices */
+vector<unsigned int> Object3D::getVertexIndices(){
+    return vertexIndices;
+}
+
+/* Returns: the vertices of the object */
+vector<vector<float>> Object3D::getTriangulation(){
+    return triangulation;
 }
 
 

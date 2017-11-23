@@ -17,13 +17,15 @@ SOURCES +=\
     openglwindow.cpp \
     geometryrender.cpp \
     main.cpp \
-    objfilereader.cpp
+    objfilereader.cpp \
+    object3d.cpp
 
 HEADERS  += \
     openglwindow.h \
     geometryrender.h \
     3dstudio.h \
-    objfilereader.h
+    objfilereader.h \
+    object3d.h
 
 FORMS    +=
 

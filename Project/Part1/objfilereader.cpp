@@ -7,22 +7,11 @@
 using namespace std;
 #include "objfilereader.h"
 
-OBJFileReader::OBJFileReader(){
-
-}
-
-vector<vector<float>> vertexList, vertices, normals, textures;
-vector<vector<string>> faces;
-
-/* Get user input.
-    - prompt: Message to the user with what to enter.
-    - returns: The string that the user entered.
-*/
-string OBJFileReader::getUserInput(string prompt){
-    cout << prompt;
-    string input;
-    cin >> input;
-    return input;
+OBJFileReader::OBJFileReader(string filename){
+    this->filename = filename;
+    if(!this -> formatData()){
+        exit(1);
+    }
 }
 
 /* Returns a vector with floats from a string where they are separated by spaces. */
@@ -38,11 +27,9 @@ vector<float> OBJFileReader::getFloats(string line){
     return values;
 }
 
-/* Takes a string on the form x/y/z (y and/or z not mandatory) and return a vector on the form [x, y, z].
-*/
+/* Takes a string on the form x/y/z (y and/or z not mandatory) and return a vector on the form [x, y, z]. */
 vector<string> OBJFileReader::parseFaceString(string str){
     string vertexIndex = "", textureIndex = "", normalIndex = "";
-
     int nFields = 1;
     for(int i = 0; i < (int)str.length(); ++i){
         if(str[i] == '/'){
@@ -75,11 +62,6 @@ vector<string> OBJFileReader::getStrings(string line){
         out.push_back(token);
     }
     return out;
-}
-
-/* Returns the vertices that are specified in the file */
-vector<vector<float>> OBJFileReader::getVertices(){
-    return vertices;
 }
 
 /* Normalize a 3d vector */
@@ -123,20 +105,17 @@ vector<vector<float>> OBJFileReader::centerVertices(vector<vector<float>> vertex
     double sumX = 0.0, sumY = 0.0, sumZ = 0.0;
     vector<vector<float>>::iterator it;
     for(it = vertexList.begin(); it != vertexList.end(); it++){
-
         vector<float> row = *it;
-        vector<float>::iterator it2;
-        for(it2 = row.begin(); it2 != row.end(); it2++){
-            sumX += row[0];
-            sumY += row[1];
-            sumZ += row[2];
-        }
+        sumX += row[0];
+        sumY += row[1];
+        sumZ += row[2];
     }
-    double aveX = sumX/(3*vertexList.size());
-    double aveY = sumY/(3*vertexList.size());
-    double aveZ = sumZ/(3*vertexList.size());
 
-    for(int i = 0; i < vertexList.size(); i++){
+    double aveX = sumX/(vertexList.size());
+    double aveY = sumY/(vertexList.size());
+    double aveZ = sumZ/(vertexList.size());
+
+    for(int i = 0; i < (int) vertexList.size(); i++){
         vertexList[i][0] -= aveX;
         vertexList[i][1] -= aveY;
         vertexList[i][2] -= aveZ;
@@ -144,13 +123,9 @@ vector<vector<float>> OBJFileReader::centerVertices(vector<vector<float>> vertex
     return vertexList;
 }
 
-
 /* Puts the vertex-, face- and texture data from a file in vectors. */
 bool OBJFileReader::formatData(){
     bool fGiven = false;
-    vertexList.clear();
-    vertices.clear();
-    faces.clear();
     ifstream data(filename);
     string line;
     if(data.is_open()){
@@ -161,7 +136,7 @@ bool OBJFileReader::formatData(){
 
                 // Add vertices to a list (vector with float values)
                 if(tag == "v "){
-                    vertexList.push_back(normalizeVec(getFloats(rest)));
+                    vertices.push_back(getFloats(rest));
                 }
 
                 // Add face data x/y/z to a list (vector with strings)
@@ -169,13 +144,25 @@ bool OBJFileReader::formatData(){
                     fGiven = true;
                     faces.push_back(getStrings(rest));
                 }
+
+                // Add texture data to a list (vector with floats)
+                else if(tag == "vt"){
+                    cout << rest << endl;
+                    textures.push_back(getFloats(rest));
+                }
             }
         }
 
         // Center the vertices at the origin
-        vertexList = centerVertices(vertexList);
+        vertices = centerVertices(vertices);
 
-        // Use face data to calculate triangulation if it is given
+        // Normalize the object row-wise
+        vector<vector<float>>::iterator IT;
+        for(IT = vertices.begin(); IT != vertices.end(); IT++){
+            *IT = normalizeVec(*IT);
+        }
+
+        // Use face data to calculate triangulation if it is given, else make one manually
         vector<vector<string>>::iterator it;
         if(fGiven){
             for(it = faces.begin(); it != faces.end(); it++){
@@ -183,12 +170,15 @@ bool OBJFileReader::formatData(){
                 vector<string> row = *it;
                 for(it2 = row.begin(); it2 != row.end(); ++it2){
                     vector<string> parsedFaceData = parseFaceString(*it2);
-                    vertices.push_back(vertexList[stoi(parsedFaceData[0]) - 1]);
+                    int index = stoi(parsedFaceData[0]) - 1;
+                    triangulation.push_back(vertices[index]);
+                    unsigned int uiIndex = index;
+                    vertexIndices.push_back(uiIndex);
                 }
             }
         }
         else{
-            vertices = triangulate(vertexList);
+            triangulation = triangulate(vertices);
         }
     }
     else{
@@ -197,6 +187,40 @@ bool OBJFileReader::formatData(){
     }
     return true;
 }
+
+/* Returns the vertices that are specified in the file */
+vector<vector<float>> OBJFileReader::getVertices(){
+    return vertices;
+}
+
+/* Returns the vertices that are specified in the file */
+vector<vector<float>> OBJFileReader::getTriangulation(){
+    return triangulation;
+}
+
+/* Returns the vertices that are specified in the file */
+vector<unsigned int> OBJFileReader::getVertexIndices(){
+    return vertexIndices;
+}
+
+vector<vector<float>> OBJFileReader::getTextures(){
+    return textures;
+}
+
+/*
+vector<unsigned int> getTextureIndices(){
+    return textureIndices;
+}
+*/
+
+
+
+
+
+
+
+
+
 
 
 

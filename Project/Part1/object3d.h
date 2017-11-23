@@ -13,6 +13,8 @@ public:
     std::vector<std::vector<float>> getVertices();
     std::vector<std::vector<float>> getTextures();
     std::vector<std::vector<float>> getNormals();
+    std::vector<unsigned int> getVertexIndices();
+    std::vector<std::vector<float>> getTriangulation();
 
     void rotateX(float alpha);
     void rotateY(float alpha);
@@ -28,7 +30,9 @@ private:
     void initialize();
     OBJFileReader* reader;
     std::string filename;
-    std::vector<std::vector<float>> vertices, textures, normals;
+    std::vector<std::vector<float>> vertices, textures, normals, triangulation;
+    std::vector<unsigned int> vertexIndices;
+
 };
 
 #endif // OBJECT3D_H

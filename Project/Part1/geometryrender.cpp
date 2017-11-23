@@ -14,16 +14,23 @@ using namespace std;
 
 GeometryRender::GeometryRender()
     : vao(0)
-    , vBuffer(QOpenGLBuffer::VertexBuffer){
+    , vBuffer(QOpenGLBuffer::VertexBuffer)
+    , iBuffer(QOpenGLBuffer::IndexBuffer){
 }
 
-QMatrix4x4 matModel;
-string filename;
-OBJFileReader* reader = new OBJFileReader();
+/* Get user input.
+    - prompt: Message to the user with what to enter.
+    - returns: The string that the user entered.
+*/
+string GeometryRender::getUserInput(string prompt){
+    cout << prompt;
+    string input;
+    cin >> input;
+    return input;
+}
 
 // Initialize OpenGL
 void GeometryRender::initialize(){
-
     OpenGLWindow::initialize();
 
     // Enable depth test
@@ -48,6 +55,10 @@ void GeometryRender::initialize(){
     vBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
     vBuffer.bind();
 
+    iBuffer.create();
+    iBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+    iBuffer.bind();
+
     // Get locations of the attributes in the shader
     // Corresponds to the GL calls glGetAttribLocation() and
     // glGetUniformLocation()
@@ -56,15 +67,18 @@ void GeometryRender::initialize(){
 
     vao.release();
     program->release();
-    loadGeometry("pyramid.obj");
+
+    // Default object is a cube
+    Object3D* defaultObj = new Object3D();
+    loadGeometry(defaultObj);
 }
 
 // Update the model matrix
-void GeometryRender::update(Object3D *obj){
+void GeometryRender::update(Object3D* obj){
     program->bind();
     vao.bind();
 
-    program->setUniformValue(locModel, obj.matModel);
+    program->setUniformValue(locModel, obj->matModel);
     OpenGLWindow::displayNow();
 
     vao.release();
@@ -72,7 +86,7 @@ void GeometryRender::update(Object3D *obj){
 }
 
 // Handle keyboard events
-void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
+/*void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
     switch (keyEvent->key()){
     case Qt::Key_Left:
         matModel.rotate(-10.0, 0.0, 1.0, 0.0);
@@ -99,27 +113,19 @@ void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
         matModel.translate(-0.1,0.0);
         break;
     case Qt::Key_O:
-        filename = reader->getUserInput("Enter filename: ");
-        //Reset transformations
-        matModel.setToIdentity();
-        loadGeometry(filename);
+        filename = getUserInput("Enter filename: ");
+        //Load a new object
+        Object3D newObj = new Object3D(filename);
+        loadGeometry(newObj);
         break;
     default:
         keyEvent -> ignore();
         break;
     }
-    update();
+    update(obj);
 }
-
-void GeometryRender::loadGeometry(string filename){
-    reader -> formatData(filename);
-    QVector<QVector<float>> vertexList = reader -> getVertices();
-
-    // Define vertices in array
-    for (QVector<QVector<float>>::iterator it = vertexList.begin() ; it != vertexList.end(); ++it){
-        QVector<float> row = *it;
-        vertices.push_back(VertVec(row[0],row[1],row[2]));
-    }
+*/
+void GeometryRender::loadGeometry(Object3D* obj){
     program->bind();
     vao.bind();
 
@@ -128,16 +134,38 @@ void GeometryRender::loadGeometry(string filename){
     glVertexAttribPointer(locVertices, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(0));
     glEnableVertexAttribArray(locVertices);
 
-    program->setUniformValue(locModel, matModel);
+    program->setUniformValue(locModel, obj->matModel);
+
+
+    vector<vector<float>> temp = obj->getVertices();
+    vertices = castVecVec2VertVec(temp);
+
+    vertexIndices = obj->getVertexIndices();
 
     // Load data to the array buffer
     // Corresponds to the GL call glBufferData()
-    size_t vSize = vertices.size()*sizeof(VertVec);
+    size_t vSize = vertices.size()*sizeof(float)*3;
     vBuffer.allocate(vSize);
     vBuffer.write(0, vertices.data(), vSize);
 
+    size_t iSize = vertexIndices.size()*sizeof(unsigned int);
+
+    iBuffer.allocate(iSize);
+    iBuffer.write(0, vertexIndices.data(), iSize);
+
     vao.release();
     program->release();
+}
+
+/* Transform a vector of vectors to a vector with VertVecs */
+vector<VertVec> GeometryRender::castVecVec2VertVec(vector<vector<float>> vertices){
+    vector<VertVec> newVec;
+    vector<vector<float>>::iterator it;
+    for (it = vertices.begin(); it != vertices.end(); it++){
+        vector<float> row = *it;
+        newVec.push_back(VertVec(row[0],row[1],row[2]));
+    }
+    return newVec;
 }
 
 // Render object
@@ -146,10 +174,41 @@ void GeometryRender::display(){
     vao.bind();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glDrawArrays(GL_LINE_LOOP, 0, vertices.size());
- //   glDrawElements(GL_LINE_LOOP, indices.size(), GL_UNSIGNED_INT, indices);
+    glDrawElements(GL_TRIANGLES, vertexIndices.size(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
     glFlush();
 
     vao.release();
     program->release();
 }
+
+
+/*
+  cout << "Indices\n\n";
+        cout << "size: " <<vertexIndices.size() << endl;
+        vector<unsigned int>::iterator it;
+        for (it = vertexIndices.begin(); it != vertexIndices.end(); it++){
+            cout << *it;
+            cout << endl;
+        }
+
+        cout <<endl;
+        cout << "Vertices" << endl << endl;
+
+        cout << "size: " << vertices.size() << endl;
+        vector<VertVec>::iterator IT;
+        for (IT = vertices.begin(); IT != vertices.end(); IT++){
+            VertVec row = *IT;
+            cout << row[0] << " " << row[1] << " " << row[2];
+            cout << endl;
+        }
+
+*/
+
+
+
+
+
+
+
+
+

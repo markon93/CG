@@ -18,7 +18,6 @@ int main(int argc, char **argv){
     window.setTitle("Workshop 1");
     window.show();
     window.initialize();
-
     return app.exec();
 }
 

@@ -1,22 +1,33 @@
 #ifndef OBJFILEREADER_H
 #define OBJFILEREADER_H
 #include <QObject>
-#include <QVector>
+
 class OBJFileReader
 {
 public:
-    OBJFileReader();
+    OBJFileReader(std::string filename);
+
     std::string getUserInput(std::string prompt);
-    bool formatData(std::string filename);
-    QVector<QVector<float>> getVertices();
+    bool formatData();
+    std::vector<std::vector<float>> getVertices();
+    std::vector<unsigned int> getVertexIndices();
+    std::vector<std::vector<float>> getTriangulation();
+
+    std::vector<std::vector<float>> getTextures();
+//    std::vector<unsigned int> getTextureIndices();
 
 private:
-    QVector<float> getFloats(std::string line);
-    QVector<std::string> getStrings(std::string line);
-    QVector<std::string> parseFaceString(std::string str);
-    QVector<float> normalizeVec(QVector<float> vec);
-    QVector<QVector<float>> centerVertices(QVector<QVector<float>> vertexList);
-    QVector<QVector<float>> triangulate(QVector<QVector<float>> verticeData);
+    std::vector<float> getFloats(std::string line);
+    std::vector<std::string> getStrings(std::string line);
+    std::vector<std::string> parseFaceString(std::string str);
+    std::vector<float> normalizeVec(std::vector<float> vec);
+    std::vector<std::vector<float>> centerVertices(std::vector<std::vector<float>> vertexList);
+    std::vector<std::vector<float>> triangulate(std::vector<std::vector<float>> verticeData);
+
+    std::string filename;
+    std::vector<std::vector<float>> vertices, triangulation, normals, textures;
+    std::vector<std::vector<std::string>> faces;
+    std::vector<unsigned int> vertexIndices;
 };
 
 #endif
