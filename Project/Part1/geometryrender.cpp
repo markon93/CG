@@ -68,13 +68,14 @@ void GeometryRender::initialize(){
     vao.release();
     program->release();
 
-    // Default object is a cube
-    Object3D* defaultObj = new Object3D();
-    loadGeometry(defaultObj);
+    // Standard object is a pyramid
+    obj = new Object3D();
+
+    loadGeometry();
 }
 
 // Update the model matrix
-void GeometryRender::update(Object3D* obj){
+void GeometryRender::update(){
     program->bind();
     vao.bind();
 
@@ -86,46 +87,57 @@ void GeometryRender::update(Object3D* obj){
 }
 
 // Handle keyboard events
-/*void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
+void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
+    float alpha = 10;
+    float t = 0.1;
+    float scaleUp = 1.1;
+    float scaleDown = 0.9;
     switch (keyEvent->key()){
     case Qt::Key_Left:
-        matModel.rotate(-10.0, 0.0, 1.0, 0.0);
+        obj->rotateX(-alpha);
         break;
     case Qt::Key_Right:
-        matModel.rotate(10.0, 0.0, 1.0, 0.0);
+        obj->rotateX(alpha);
         break;
     case Qt::Key_Up:
-        matModel.rotate(10.0, 1.0, 0.0, 0.0);
+        obj->rotateY(10);
         break;
     case Qt::Key_Down:
-        matModel.rotate(-10.0, 1.0, 0.0, 0.0);
+        obj->rotateY(-alpha);
         break;
     case Qt::Key_I:
-        matModel.translate(0.0,0.1);
+        obj->translate(0.0,t,0.0);
         break;
     case Qt::Key_K:
-        matModel.translate(0.0,-0.1);
+        obj->translate(0.0,-t,0.0);
         break;
     case Qt::Key_L:
-        matModel.translate(0.1,0.0);
+        obj->translate(t,0.0,0.0);
         break;
     case Qt::Key_J:
-        matModel.translate(-0.1,0.0);
+        obj->translate(-t,0.0,0.0);
+        break;
+    case Qt::Key_W:
+        obj->scale(scaleUp, scaleUp, scaleUp);
+        break;
+    case Qt::Key_S:
+        obj->scale(scaleDown, scaleDown, scaleDown);
         break;
     case Qt::Key_O:
         filename = getUserInput("Enter filename: ");
         //Load a new object
-        Object3D newObj = new Object3D(filename);
-        loadGeometry(newObj);
+        obj->matModel.setToIdentity();
+        obj = new Object3D(filename);
+        loadGeometry();
         break;
     default:
         keyEvent -> ignore();
         break;
     }
-    update(obj);
+    update();
 }
-*/
-void GeometryRender::loadGeometry(Object3D* obj){
+
+void GeometryRender::loadGeometry(){
     program->bind();
     vao.bind();
 

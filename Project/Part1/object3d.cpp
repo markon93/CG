@@ -5,7 +5,7 @@
 using namespace std;
 
 Object3D::Object3D(){
-    filename = "cube_brick.obj";
+    filename = "pyramid.obj";
     this->initialize();
 }
 
@@ -42,11 +42,22 @@ vector<vector<float>> Object3D::getTriangulation(){
 //    std::vector<std::vector<float>> getNormals();
 
 
-//    void rotateX(float alpha);
-//    void rotateY(float alpha);
-//    void rotateZ(float alpha);
+    void Object3D::rotateX(float alpha){
+        matModel.rotate(alpha, 0.0, 1.0, 0.0);
+    }
 
-//    void translate(float dx, float dy, float dz);
+    void Object3D::rotateY(float alpha){
+        matModel.rotate(alpha, 1.0, 0.0, 0.0);
+    }
 
-//    void scale(float sx, float sy, float sz);
+    void Object3D::rotateZ(float alpha){
+        matModel.rotate(alpha, 0.0, 0.0, 1.0);
+    }
 
+    void Object3D::translate(float dx, float dy, float dz){
+        matModel.translate(dx, dy, dz);
+    }
+
+    void Object3D::scale(float sx, float sy, float sz){
+        matModel.scale(sx,sy,sz);
+    }

@@ -24,10 +24,12 @@ public:
     void display() Q_DECL_OVERRIDE;
 
 protected:
-   // void keyPressEvent(QKeyEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     std::unique_ptr<QOpenGLShaderProgram> program {};
+
+    Object3D* obj;
 
     // OpenGL buffers
     QOpenGLVertexArrayObject vao;
@@ -43,8 +45,8 @@ private:
     std::vector<unsigned int> vertexIndices;
     std::vector<VertVec> castVecVec2VertVec(std::vector<std::vector<float>> vertices);
 
-    void update(Object3D* obj);
-    void loadGeometry(Object3D* obj);
+    void update();
+    void loadGeometry();
 
     std::string filename;
 };
