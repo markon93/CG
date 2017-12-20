@@ -58,7 +58,10 @@ void GeometryRender::initialize(){
 
 /////
     loc_k_a = program->uniformLocation("k_a");
+    loc_k_d = program->uniformLocation("k_d");
+    loc_k_s = program->uniformLocation("k_s");
     locLightPos = program->uniformLocation("lightPosition");
+    locLightLuminance = program->uniformLocation("lightLuminance");
     locAmbientLightRGB = program->uniformLocation("ambientLightRGB");
 /////
 
@@ -68,9 +71,12 @@ void GeometryRender::initialize(){
 
 /////////
     // Initialize the light
-    ambientLight = new LightSource(QVector4D(0.0,0.0,0.0,0.0), 0.5, 0.5, 0.5);
-    program->setUniformValue(locLightPos, ambientLight->getPosition());
+    ambientLight = new LightSource(QVector4D(0.0,0.0,0.0,0.0), 0.2, 0.2, 0.2);
     program->setUniformValue(locAmbientLightRGB, ambientLight->getRGB());
+
+    light = new LightSource(QVector4D(0.0,1.0,5.0,1.0), 0.7, 0.7, 0.7);
+    program->setUniformValue(locLightPos, light->getPosition());
+    program->setUniformValue(locLightLuminance, light->getRGB());
 /////////
 
     // Initialize the camera
@@ -78,22 +84,25 @@ void GeometryRender::initialize(){
     program->setUniformValue(locView, camera->V);
     program->setUniformValue(locProj, camera->P);
 
-////////
-    float k_a = 1.0;
-    program->setUniformValue(loc_k_a, k_a);
-////////
-
-    vao.release();
-    program->release();
-
     // Standard object is a cube
     reader = new OBJFileReader();
     obj = new Object3D();
+
+///////////
+    // Initialize the material
+    program->setUniformValue(loc_k_a, obj->getK_A());
+    program->setUniformValue(loc_k_d, obj->getK_D());
+    program->setUniformValue(loc_k_s, obj->getK_S());
+///////////
+
     obj->setVertices(reader->getVertices());
     obj->setVertexIndices(reader->getVertexIndices());
     obj->setTriangulation(reader->getTriangulation());
     obj->setTextures(reader->getTextures());
     obj->setNormals(reader->getVertexNormals());
+
+    vao.release();
+    program->release();
 
     loadGeometry();
 }
@@ -123,10 +132,42 @@ void GeometryRender::updateLightSourcePosition(){
     OpenGLWindow::displayNow();
 }
 
+// Update the luminance of a light source
+void GeometryRender::updateLightLuminance(){
+    program->bind();
+    program->setUniformValue(locLightLuminance, light->getRGB());
+    program->release();
+    OpenGLWindow::displayNow();
+}
+
 // Update the color of a light source
 void GeometryRender::updateAmbientLightSourceColor(){
     program->bind();
     program->setUniformValue(locAmbientLightRGB, ambientLight->getRGB());
+    program->release();
+    OpenGLWindow::displayNow();
+}
+
+// Update the ambient parameter of the object's material
+void GeometryRender::updateMaterialAmbience(){
+    program->bind();
+    program->setUniformValue(loc_k_a, obj->getK_A());
+    program->release();
+    OpenGLWindow::displayNow();
+}
+
+// Update the diffuse parameter of the object's material
+void GeometryRender::updateMaterialDiffusivity(){
+    program->bind();
+    program->setUniformValue(loc_k_d, obj->getK_D());
+    program->release();
+    OpenGLWindow::displayNow();
+}
+
+// Update the specular parameter of the object's material
+void GeometryRender::updateMaterialSpecularity(){
+    program->bind();
+    program->setUniformValue(loc_k_s, obj->getK_S());
     program->release();
     OpenGLWindow::displayNow();
 }
@@ -390,20 +431,73 @@ void GeometryRender::changeLightZ(float z){
     updateLightSourcePosition();
 }
 
+// Change the color of the light source
+void GeometryRender::changeLightLuminanceR(double r){
+    light->setR(r);
+    updateLightLuminance();
+}
+void GeometryRender::changeLightLuminanceG(double g){
+    light->setG(g);
+    updateLightLuminance();
+}
+void GeometryRender::changeLightLuminanceB(double b){
+    light->setB(b);
+    updateLightLuminance();
+}
+
 // Change the color of the ambient light
-void GeometryRender::changeLightR(double r){
+void GeometryRender::changeAmbientLightR(double r){
     ambientLight->setR(r);
     updateAmbientLightSourceColor();
 }
-void GeometryRender::changeLightG(double g){
+void GeometryRender::changeAmbientLightG(double g){
     ambientLight->setG(g);
     updateAmbientLightSourceColor();
 }
-void GeometryRender::changeLightB(double b){
+void GeometryRender::changeAmbientLightB(double b){
     ambientLight->setB(b);
     updateAmbientLightSourceColor();
 }
 
+// Change the ambient material properties
+void GeometryRender::changeK_A_R(double r){
+    obj->setK_A_R(r);
+    updateMaterialAmbience();
+}
+void GeometryRender::changeK_A_G(double g){
+    obj->setK_A_G(g);
+    updateMaterialAmbience();
+}
+void GeometryRender::changeK_A_B(double b){
+    obj->setK_A_B(b);
+    updateMaterialAmbience();
+}
+
+void GeometryRender::changeK_D_R(double r){
+    obj->setK_D_R(r);
+    updateMaterialDiffusivity();
+}
+void GeometryRender::changeK_D_G(double g){
+    obj->setK_D_G(g);
+    updateMaterialDiffusivity();
+}
+void GeometryRender::changeK_D_B(double b){
+    obj->setK_D_B(b);
+    updateMaterialDiffusivity();
+}
+
+void GeometryRender::changeK_S_R(double r){
+    obj->setK_S_R(r);
+    updateMaterialSpecularity();
+}
+void GeometryRender::changeK_S_G(double g){
+    obj->setK_S_G(g);
+    updateMaterialSpecularity();
+}
+void GeometryRender::changeK_S_B(double b){
+    obj->setK_S_B(b);
+    updateMaterialSpecularity();
+}
 
 
 /*

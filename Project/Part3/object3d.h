@@ -11,7 +11,6 @@ public:
     Object3D(std::string fname);
 
     std::vector<std::vector<float>> getVertices();
-//    std::vector<std::vector<float>> getTextures();
     std::vector<std::vector<float>> getNormals();
     std::vector<unsigned int> getVertexIndices();
     std::vector<std::vector<float>> getTriangulation();
@@ -27,17 +26,33 @@ public:
     void rotateZ(float alpha);
 
     void translate(float dx, float dy, float dz);
-
     void scale(float sx, float sy, float sz);
+
+    void setK_A_R(double k_a_r);
+    void setK_A_G(double k_a_g);
+    void setK_A_B(double k_a_b);
+
+    void setK_D_R(double k_d_r);
+    void setK_D_G(double k_d_g);
+    void setK_D_B(double k_d_b);
+
+    void setK_S_R(double k_s_r);
+    void setK_S_G(double k_s_g);
+    void setK_S_B(double k_s_b);
+
+    QVector4D getK_A();
+    QVector4D getK_D();
+    QVector4D getK_S();
 
     QMatrix4x4 matModel;
 
     void reset();
 private:
+    QVector4D k_ambient, k_diffuse, k_specular;
+
     void initialize();
     std::vector<std::vector<float>> vertices, textures, normals, triangulation;
     std::vector<unsigned int> vertexIndices;
-
     std::vector<float> midpoint;
     void updateVertices(float dx, float dy, float dz);
     void updateMidpoint();

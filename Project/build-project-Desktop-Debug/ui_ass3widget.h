@@ -172,7 +172,7 @@ public:
         sb_light_y->setDecimals(1);
         sb_light_y->setMinimum(-1000);
         sb_light_y->setMaximum(1000);
-        sb_light_y->setValue(0.5);
+        sb_light_y->setValue(1);
         sb_light_z = new QDoubleSpinBox(tab);
         sb_light_z->setObjectName(QStringLiteral("sb_light_z"));
         sb_light_z->setGeometry(QRect(30, 90, 81, 25));
@@ -239,6 +239,7 @@ public:
         sb_ambient_r->setGeometry(QRect(80, 220, 160, 18));
         sb_ambient_r->setFocusPolicy(Qt::NoFocus);
         sb_ambient_r->setMaximum(100);
+        sb_ambient_r->setValue(20);
         sb_ambient_r->setOrientation(Qt::Horizontal);
         l_ambient_b = new QLabel(tab);
         l_ambient_b->setObjectName(QStringLiteral("l_ambient_b"));
@@ -254,12 +255,14 @@ public:
         sb_ambient_g->setGeometry(QRect(80, 240, 160, 18));
         sb_ambient_g->setFocusPolicy(Qt::NoFocus);
         sb_ambient_g->setMaximum(100);
+        sb_ambient_g->setValue(20);
         sb_ambient_g->setOrientation(Qt::Horizontal);
         sb_ambient_b = new QDoubleSlider(tab);
         sb_ambient_b->setObjectName(QStringLiteral("sb_ambient_b"));
         sb_ambient_b->setGeometry(QRect(80, 260, 160, 18));
         sb_ambient_b->setFocusPolicy(Qt::NoFocus);
         sb_ambient_b->setMaximum(100);
+        sb_ambient_b->setValue(20);
         sb_ambient_b->setOrientation(Qt::Horizontal);
         ambient_b = new QLabel(tab);
         ambient_b->setObjectName(QStringLiteral("ambient_b"));
@@ -289,6 +292,7 @@ public:
         sb_ambient_c_r->setGeometry(QRect(80, 30, 160, 18));
         sb_ambient_c_r->setFocusPolicy(Qt::NoFocus);
         sb_ambient_c_r->setMaximum(100);
+        sb_ambient_c_r->setValue(20);
         sb_ambient_c_r->setOrientation(Qt::Horizontal);
         l_ambient_c_b = new QLabel(tab_3);
         l_ambient_c_b->setObjectName(QStringLiteral("l_ambient_c_b"));
@@ -304,12 +308,14 @@ public:
         sb_ambient_c_g->setGeometry(QRect(80, 50, 160, 18));
         sb_ambient_c_g->setFocusPolicy(Qt::NoFocus);
         sb_ambient_c_g->setMaximum(100);
+        sb_ambient_c_g->setValue(20);
         sb_ambient_c_g->setOrientation(Qt::Horizontal);
         sb_ambient_c_b = new QDoubleSlider(tab_3);
         sb_ambient_c_b->setObjectName(QStringLiteral("sb_ambient_c_b"));
         sb_ambient_c_b->setGeometry(QRect(80, 70, 160, 18));
         sb_ambient_c_b->setFocusPolicy(Qt::NoFocus);
         sb_ambient_c_b->setMaximum(100);
+        sb_ambient_c_b->setValue(20);
         sb_ambient_c_b->setOrientation(Qt::Horizontal);
         ambient_c_b = new QLabel(tab_3);
         ambient_c_b->setObjectName(QStringLiteral("ambient_c_b"));
@@ -328,6 +334,7 @@ public:
         sb_diffuse_r->setGeometry(QRect(80, 120, 160, 18));
         sb_diffuse_r->setFocusPolicy(Qt::NoFocus);
         sb_diffuse_r->setMaximum(100);
+        sb_diffuse_r->setValue(100);
         sb_diffuse_r->setOrientation(Qt::Horizontal);
         l_diffuse_b = new QLabel(tab_3);
         l_diffuse_b->setObjectName(QStringLiteral("l_diffuse_b"));
@@ -343,6 +350,7 @@ public:
         sb_diffuse_g->setGeometry(QRect(80, 140, 160, 18));
         sb_diffuse_g->setFocusPolicy(Qt::NoFocus);
         sb_diffuse_g->setMaximum(100);
+        sb_diffuse_g->setValue(80);
         sb_diffuse_g->setOrientation(Qt::Horizontal);
         sb_diffuse_b = new QDoubleSlider(tab_3);
         sb_diffuse_b->setObjectName(QStringLiteral("sb_diffuse_b"));
@@ -367,6 +375,7 @@ public:
         sb_specular_r->setGeometry(QRect(80, 210, 160, 18));
         sb_specular_r->setFocusPolicy(Qt::NoFocus);
         sb_specular_r->setMaximum(100);
+        sb_specular_r->setValue(100);
         sb_specular_r->setOrientation(Qt::Horizontal);
         l_specular_b = new QLabel(tab_3);
         l_specular_b->setObjectName(QStringLiteral("l_specular_b"));
@@ -382,12 +391,14 @@ public:
         sb_specular_g->setGeometry(QRect(80, 230, 160, 18));
         sb_specular_g->setFocusPolicy(Qt::NoFocus);
         sb_specular_g->setMaximum(100);
+        sb_specular_g->setValue(100);
         sb_specular_g->setOrientation(Qt::Horizontal);
         sb_specular_b = new QDoubleSlider(tab_3);
         sb_specular_b->setObjectName(QStringLiteral("sb_specular_b"));
         sb_specular_b->setGeometry(QRect(80, 250, 160, 18));
         sb_specular_b->setFocusPolicy(Qt::NoFocus);
         sb_specular_b->setMaximum(100);
+        sb_specular_b->setValue(100);
         sb_specular_b->setOrientation(Qt::Horizontal);
         specular_b = new QLabel(tab_3);
         specular_b->setObjectName(QStringLiteral("specular_b"));
@@ -534,7 +545,7 @@ public:
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_fov, SLOT(setEnabled(bool)));
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_pefar, SLOT(setEnabled(bool)));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Ass3Widget);

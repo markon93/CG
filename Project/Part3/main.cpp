@@ -50,6 +50,7 @@ int main(int argc, char **argv){
     QObject::connect(&widgets, SIGNAL(changePlFar(int)),
                      &window, SLOT(changePlFar(int)));
 
+    // Light source position
     QObject::connect(&widgets, SIGNAL(changeLightX(float)),
                      &window, SLOT(changeLightX(float)));
 
@@ -59,14 +60,55 @@ int main(int argc, char **argv){
     QObject::connect(&widgets, SIGNAL(changeLightZ(float)),
                      &window, SLOT(changeLightZ(float)));
 
-    QObject::connect(&widgets, SIGNAL(changeLightR(double)),
-                     &window, SLOT(changeLightR(double)));
+    // Light source intensity
+    QObject::connect(&widgets, SIGNAL(changeLightLuminanceR(double)),
+                     &window, SLOT(changeLightLuminanceR(double)));
 
-    QObject::connect(&widgets, SIGNAL(changeLightG(double)),
-                     &window, SLOT(changeLightG(double)));
+    QObject::connect(&widgets, SIGNAL(changeLightLuminanceG(double)),
+                     &window, SLOT(changeLightLuminanceG(double)));
 
-    QObject::connect(&widgets, SIGNAL(changeLightB(double)),
-                     &window, SLOT(changeLightB(double)));
+    QObject::connect(&widgets, SIGNAL(changeLightLuminanceB(double)),
+                     &window, SLOT(changeLightLuminanceB(double)));
+
+    // Ambient light intensity
+    QObject::connect(&widgets, SIGNAL(changeAmbientLightR(double)),
+                     &window, SLOT(changeAmbientLightR(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeAmbientLightG(double)),
+                     &window, SLOT(changeAmbientLightG(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeAmbientLightB(double)),
+                     &window, SLOT(changeAmbientLightB(double)));
+
+    // Material ambience
+    QObject::connect(&widgets, SIGNAL(changeK_A_R(double)),
+                     &window, SLOT(changeK_A_R(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_A_G(double)),
+                     &window, SLOT(changeK_A_G(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_A_B(double)),
+                     &window, SLOT(changeK_A_B(double)));
+
+    // Material diffusivity
+    QObject::connect(&widgets, SIGNAL(changeK_D_R(double)),
+                     &window, SLOT(changeK_D_R(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_D_G(double)),
+                     &window, SLOT(changeK_D_G(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_D_B(double)),
+                     &window, SLOT(changeK_D_B(double)));
+
+    // Material specularity
+    QObject::connect(&widgets, SIGNAL(changeK_S_R(double)),
+                     &window, SLOT(changeK_S_R(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_S_G(double)),
+                     &window, SLOT(changeK_S_G(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeK_S_B(double)),
+                     &window, SLOT(changeK_S_B(double)));
     return app.exec();
 }
 

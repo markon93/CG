@@ -12,11 +12,10 @@ uniform vec4 lightPosition;
 //////
 
 uniform mat4 M, V, P;
-void
-main(){
+void main(){
 
-    fN = vNormal;
-    fE = vPosition.xyz;
+    fN = vec3(M*vec4(vNormal, 0.0));
+    fE = vec3(M*vec4(vPosition, 1.0));
     fL = lightPosition.xyz;
 
     if(lightPosition.w != 0.0){
@@ -31,7 +30,6 @@ main(){
 //    vec4 h = l + v;
 //    h = normalize(h);
 
-
 //    vec4 I_ambient = I_a * k_a;
 //    vec4 I_diffuse = I_l*k_d*dot(vNormal,l);
 //    vec4 I_specular = I_l*k_s*(pow(dot(vNormal,h),alpha));
@@ -40,5 +38,9 @@ main(){
 //    color.a = alpha;
 
     ///////
-
 }
+
+
+
+
+//////// OBS ATAN2 DIVIDERA MED 2PI INTE PI //////////

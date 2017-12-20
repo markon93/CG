@@ -114,8 +114,25 @@ signals:
     void changeLightY(float y);
     void changeLightZ(float z);
 
-    void changeLightR(double r);
-    void changeLightG(double g);
-    void changeLightB(double b);
+    void changeLightLuminanceR(double r);
+    void changeLightLuminanceG(double g);
+    void changeLightLuminanceB(double b);
+
+    void changeAmbientLightR(double r);
+    void changeAmbientLightG(double g);
+    void changeAmbientLightB(double b);
+
+    // Material
+    void changeK_A_R(double r);
+    void changeK_A_G(double g);
+    void changeK_A_B(double b);
+
+    void changeK_D_R(double r);
+    void changeK_D_G(double g);
+    void changeK_D_B(double b);
+
+    void changeK_S_R(double r);
+    void changeK_S_G(double g);
+    void changeK_S_B(double b);
 };
 

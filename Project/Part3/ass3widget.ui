@@ -101,7 +101,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -164,7 +164,7 @@
       <double>1000.000000000000000</double>
      </property>
      <property name="value">
-      <double>0.500000000000000</double>
+      <double>1.000000000000000</double>
      </property>
     </widget>
     <widget class="QDoubleSpinBox" name="sb_light_z">
@@ -409,6 +409,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>20</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -467,6 +470,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>20</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -485,6 +491,9 @@
      </property>
      <property name="maximum">
       <number>100</number>
+     </property>
+     <property name="value">
+      <number>20</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -594,6 +603,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>20</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -652,6 +664,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>20</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -670,6 +685,9 @@
      </property>
      <property name="maximum">
       <number>100</number>
+     </property>
+     <property name="value">
+      <number>20</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -742,6 +760,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>100</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -799,6 +820,9 @@
      </property>
      <property name="maximum">
       <number>100</number>
+     </property>
+     <property name="value">
+      <number>80</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -890,6 +914,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>100</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -948,6 +975,9 @@
      <property name="maximum">
       <number>100</number>
      </property>
+     <property name="value">
+      <number>100</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -965,6 +995,9 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="value">
       <number>100</number>
      </property>
      <property name="orientation">

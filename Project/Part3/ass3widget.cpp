@@ -151,7 +151,7 @@ void Ass3Widget::on_sb_light_r_doubleValueChanged(double v){
         ui->sb_light_g->setValue(v*100);
         ui->sb_light_b->setValue(v*100);
     }
-    emit changeLightR(v);
+    emit changeLightLuminanceR(v);
 }
 
 void Ass3Widget::on_sb_light_g_doubleValueChanged(double v)
@@ -160,7 +160,7 @@ void Ass3Widget::on_sb_light_g_doubleValueChanged(double v)
         ui->sb_light_r->setValue(v*100);
         ui->sb_light_b->setValue(v*100);
     }
-    emit changeLightG(v);
+    emit changeLightLuminanceG(v);
 }
 
 void Ass3Widget::on_sb_light_b_doubleValueChanged(double v)
@@ -169,7 +169,7 @@ void Ass3Widget::on_sb_light_b_doubleValueChanged(double v)
         ui->sb_light_r->setValue(v*100);
         ui->sb_light_g->setValue(v*100);
     }
-    emit changeLightB(v);
+    emit changeLightLuminanceB(v);
 }
 
 void Ass3Widget::on_sb_ambient_r_doubleValueChanged(double v)
@@ -178,7 +178,7 @@ void Ass3Widget::on_sb_ambient_r_doubleValueChanged(double v)
         ui->sb_ambient_g->setValue(v*100);
         ui->sb_ambient_b->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeAmbientLightR(v);
 }
 
 void Ass3Widget::on_sb_ambient_g_doubleValueChanged(double v)
@@ -187,7 +187,7 @@ void Ass3Widget::on_sb_ambient_g_doubleValueChanged(double v)
         ui->sb_ambient_r->setValue(v*100);
         ui->sb_ambient_b->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeAmbientLightG(v);
 }
 
 void Ass3Widget::on_sb_ambient_b_doubleValueChanged(double v)
@@ -196,53 +196,44 @@ void Ass3Widget::on_sb_ambient_b_doubleValueChanged(double v)
         ui->sb_ambient_r->setValue(v*100);
         ui->sb_ambient_g->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeAmbientLightB(v);
 }
 
 // *** Default material tab ***
-void Ass3Widget::on_sb_ambient_c_r_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_ambient_c_r_doubleValueChanged(double v){
+    emit changeK_A_R(v);
 }
 
-void Ass3Widget::on_sb_ambient_c_g_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_ambient_c_g_doubleValueChanged(double v){
+    emit changeK_A_G(v);
 }
 
-void Ass3Widget::on_sb_ambient_c_b_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_ambient_c_b_doubleValueChanged(double v){
+    emit changeK_A_B(v);
 }
 
-void Ass3Widget::on_sb_diffuse_r_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_diffuse_r_doubleValueChanged(double v){
+    emit changeK_D_R(v);
 }
 
-void Ass3Widget::on_sb_diffuse_g_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_diffuse_g_doubleValueChanged(double v){
+    emit changeK_D_G(v);
 }
 
-void Ass3Widget::on_sb_diffuse_b_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_diffuse_b_doubleValueChanged(double v){
+    emit changeK_D_B(v);
 }
 
-void Ass3Widget::on_sb_specular_r_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_specular_r_doubleValueChanged(double v){
+    emit changeK_S_R(v);
 }
 
-void Ass3Widget::on_sb_specular_g_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_specular_g_doubleValueChanged(double v){
+    emit changeK_S_G(v);
 }
 
-void Ass3Widget::on_sb_specular_b_doubleValueChanged(double v)
-{
-    cout << "Slider value " << v << endl;
+void Ass3Widget::on_sb_specular_b_doubleValueChanged(double v){
+    emit changeK_S_B(v);
 }
 
 void Ass3Widget::on_sb_phong_valueChanged(int phong)

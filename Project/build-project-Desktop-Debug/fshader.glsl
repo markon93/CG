@@ -5,37 +5,38 @@ in vec3 fE;
 
 // Light properties
 uniform vec3 ambientLightRGB;
-
-vec4 I_l = vec4(0.4, 0.4, 0.2, 0.0);
+uniform vec3 lightLuminance;
 
 // Matrial properties
-uniform float k_a = 1.0, k_d = 1.0, k_s = 1.0;
-float alpha = 1;
+uniform vec4 k_a, k_d, k_s;
+float alpha = 100;
 
 out vec4  color;
 
 void main(){
 
     // Modified Phong lighting model
-     vec3 r = 2*(fN*fL)*fN - fL;
-     vec3 h = fL + fE;
-     h = normalize(h);
+    vec3 NN = normalize(fN);
+    vec3 EE = normalize(fE);
+    vec3 LL = normalize(fL);
 
-     // Ambient light intensity
-     vec4 L_a = vec4(ambientLightRGB, 0.0);
-     vec4 I_a = L_a*k_a;
+    vec3 r = 2*(fN*fL)*fN - fL;
+    vec3 h = normalize(LL + EE);
 
-     vec4 L_d = vec4(0.5,0.5,0.5,0);
+    // Ambient light intensity
+    vec4 L_a = vec4(ambientLightRGB, 0.0);
+    vec4 I_a = L_a*k_a;
 
-     // Diffuse light intensity
-     vec4 I_diffuse = k_d*max(dot(fN,fL),0)*L_d;
+    // Diffuse light intensity
+    vec4 I_l = vec4(lightLuminance,0.0);
+    vec4 I_diffuse = I_l*k_d*max(dot(NN,LL),0);
 
-     // Specular light intensity
-     vec4 I_specular = I_l*k_s*(pow(dot(fN,h),alpha));
+    // Specular light intensity
+    vec4 I_specular = I_l*k_s*(pow(max(dot(NN,h),0),alpha));
 
-     // Total light intensity
-     color = I_a;// + I_diffuse + I_specular;
+    // Total light intensity
+    color = I_a + I_diffuse + I_specular;
 
-     // Shininess
-     color.a = alpha;
+    // Shininess
+    color.a = alpha;
 }

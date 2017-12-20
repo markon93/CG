@@ -6,6 +6,9 @@ using namespace std;
 
 Object3D::Object3D(){
     midpoint = {0.0,0.0,0.0};
+    k_ambient = {0.2, 0.2, 0.2, 1.0};
+    k_diffuse = {1.0, 0.8, 0.0, 1.0};
+    k_specular = {1.0, 1.0, 1.0, 1.0};
 }
 
 /* Set the vertices of the object */
@@ -57,7 +60,6 @@ void Object3D::reset(){
 vector<vector<float>> Object3D::getNormals(){
     return normals;
 }
-
 
 void Object3D::rotateX(float alpha){
     //matModel.translate(-midpoint[0],-midpoint[1],-midpoint[2]);
@@ -111,4 +113,83 @@ void Object3D::updateMidpoint(){
 
     midpoint = {aveX, aveY, aveZ};
 }
+
+// Set the ambient coefficient of the material
+void Object3D::setK_A_R(double k_a_r){
+    this->k_ambient[0] = k_a_r;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_A_G(double k_a_g){
+    this->k_ambient[1] = k_a_g;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_A_B(double k_a_b){
+    this->k_ambient[2] = k_a_b;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_D_R(double k_d_r){
+    this->k_diffuse[0] = k_d_r;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_D_G(double k_d_g){
+    this->k_diffuse[1] = k_d_g;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_D_B(double k_d_b){
+    this->k_diffuse[2] = k_d_b;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_S_R(double k_s_r){
+    this->k_specular[0] = k_s_r;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_S_G(double k_s_g){
+    this->k_specular[1] = k_s_g;
+}
+
+// Set the ambient coefficient of the material
+void Object3D::setK_S_B(double k_s_b){
+    this->k_specular[2] = k_s_b;
+}
+
+// Set the ambient coefficient of the material
+QVector4D Object3D::getK_A(){
+    return this->k_ambient;
+}
+
+// Set the ambient coefficient of the material
+QVector4D Object3D::getK_D(){
+    return this->k_diffuse;
+}
+
+// Set the ambient coefficient of the material
+QVector4D Object3D::getK_S(){
+    return this->k_specular;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
