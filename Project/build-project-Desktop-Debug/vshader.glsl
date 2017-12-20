@@ -8,7 +8,7 @@ out vec3 fN;
 out vec3 fE;
 out vec3 fL;
 
-uniform vec4 lightPosition = vec4(2.0, 0.5, 5.0, 0.0);
+uniform vec4 lightPosition;
 //////
 
 uniform mat4 M, V, P;

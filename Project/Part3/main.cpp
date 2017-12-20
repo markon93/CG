@@ -50,7 +50,23 @@ int main(int argc, char **argv){
     QObject::connect(&widgets, SIGNAL(changePlFar(int)),
                      &window, SLOT(changePlFar(int)));
 
+    QObject::connect(&widgets, SIGNAL(changeLightX(float)),
+                     &window, SLOT(changeLightX(float)));
 
+    QObject::connect(&widgets, SIGNAL(changeLightY(float)),
+                     &window, SLOT(changeLightY(float)));
+
+    QObject::connect(&widgets, SIGNAL(changeLightZ(float)),
+                     &window, SLOT(changeLightZ(float)));
+
+    QObject::connect(&widgets, SIGNAL(changeLightR(double)),
+                     &window, SLOT(changeLightR(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeLightG(double)),
+                     &window, SLOT(changeLightG(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeLightB(double)),
+                     &window, SLOT(changeLightB(double)));
     return app.exec();
 }
 

@@ -70,9 +70,6 @@ vector<string> OBJFileReader::getStrings(string line){
     while (iss >> token) {
         out.push_back(token);
         nTokens++;
-//        if(nTokens == 3){
-//                break;
-//        }
     }
     return out;
 }
@@ -259,62 +256,6 @@ bool OBJFileReader::formatData(){
                     }
                 }
             }
-
-            cout << "VERTICES" << endl;
-            cout << vertices.size() << endl;
-            for(int i = 0; i <(int) vertices.size();i++){
-                vector<float> row = vertices[i];
-                for(int j = 0; j< (int)row.size();j++){
-                    cout<<row[j]<<" ";
-                }
-                cout << endl;
-            }
-            cout << endl;
-
-            cout << "VERTEX INDICES" << endl;
-            cout << vertexIndices.size() << endl;
-            for(int i = 0; i <(int) vertexIndices.size();i++){
-                cout<<vertexIndices[i]<<endl;
-            }
-            cout << endl;
-
-            cout << "VERTEX NORMALS" << endl;
-            cout << vertexNormals.size() << endl;
-            for(int i = 0; i <(int) vertexNormals.size();i++){
-                vector<float> row = vertexNormals[i];
-                for(int j = 0; j< (int)row.size();j++){
-                    cout<<row[j]<<" ";
-                }
-                cout << endl;
-            }
-            cout << endl;
-
-            cout << "TRIANGULATION" << endl;
-            cout << triangulation.size() << endl;
-            for(int i = 0; i <(int) triangulation.size();i++){
-                vector<float> row = triangulation[i];
-                for(int j = 0; j< (int)row.size();j++){
-                    cout<<row[j]<<" ";
-                }
-                cout << endl;
-            }
-            cout << endl;
-
-            cout << "FACES" << endl;
-            cout << faces.size() << endl;
-            for(int i = 0; i <(int) faces.size();i++){
-                vector<string> row = faces[i];
-                for(int j = 0; j< (int)row.size();j++){
-                    cout<<row[j]<<" ";
-                }
-                cout << endl;
-            }
-            cout << endl;
-
-
-
-            cout << faceNormals.size() << endl;
-            cout << normalIndices.size() << endl << endl;
         }
 /////////////
         else{

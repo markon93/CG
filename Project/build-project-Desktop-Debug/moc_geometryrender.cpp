@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GeometryRender_t {
-    QByteArrayData data[19];
-    char stringdata0[190];
+    QByteArrayData data[31];
+    char stringdata0[280];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,7 +47,19 @@ QT_MOC_LITERAL(14, 150, 5), // "angle"
 QT_MOC_LITERAL(15, 156, 11), // "changePlTop"
 QT_MOC_LITERAL(16, 168, 3), // "top"
 QT_MOC_LITERAL(17, 172, 11), // "changePlFar"
-QT_MOC_LITERAL(18, 184, 5) // "plfar"
+QT_MOC_LITERAL(18, 184, 5), // "plfar"
+QT_MOC_LITERAL(19, 190, 12), // "changeLightX"
+QT_MOC_LITERAL(20, 203, 1), // "x"
+QT_MOC_LITERAL(21, 205, 12), // "changeLightY"
+QT_MOC_LITERAL(22, 218, 1), // "y"
+QT_MOC_LITERAL(23, 220, 12), // "changeLightZ"
+QT_MOC_LITERAL(24, 233, 1), // "z"
+QT_MOC_LITERAL(25, 235, 12), // "changeLightR"
+QT_MOC_LITERAL(26, 248, 1), // "r"
+QT_MOC_LITERAL(27, 250, 12), // "changeLightG"
+QT_MOC_LITERAL(28, 263, 1), // "g"
+QT_MOC_LITERAL(29, 265, 12), // "changeLightB"
+QT_MOC_LITERAL(30, 278, 1) // "b"
 
     },
     "GeometryRender\0changeFOV\0\0fov\0changePFar\0"
@@ -55,7 +67,9 @@ QT_MOC_LITERAL(18, 184, 5) // "plfar"
     "changeToPerspective\0changeToParallel\0"
     "changeOblScale\0scale\0changeOblAngle\0"
     "angle\0changePlTop\0top\0changePlFar\0"
-    "plfar"
+    "plfar\0changeLightX\0x\0changeLightY\0y\0"
+    "changeLightZ\0z\0changeLightR\0r\0"
+    "changeLightG\0g\0changeLightB\0b"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,7 +79,7 @@ static const uint qt_meta_data_GeometryRender[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -73,15 +87,21 @@ static const uint qt_meta_data_GeometryRender[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   59,    2, 0x0a /* Public */,
-       4,    1,   62,    2, 0x0a /* Public */,
-       6,    1,   65,    2, 0x0a /* Public */,
-       9,    0,   68,    2, 0x0a /* Public */,
-      10,    0,   69,    2, 0x0a /* Public */,
-      11,    1,   70,    2, 0x0a /* Public */,
-      13,    1,   73,    2, 0x0a /* Public */,
-      15,    1,   76,    2, 0x0a /* Public */,
-      17,    1,   79,    2, 0x0a /* Public */,
+       1,    1,   89,    2, 0x0a /* Public */,
+       4,    1,   92,    2, 0x0a /* Public */,
+       6,    1,   95,    2, 0x0a /* Public */,
+       9,    0,   98,    2, 0x0a /* Public */,
+      10,    0,   99,    2, 0x0a /* Public */,
+      11,    1,  100,    2, 0x0a /* Public */,
+      13,    1,  103,    2, 0x0a /* Public */,
+      15,    1,  106,    2, 0x0a /* Public */,
+      17,    1,  109,    2, 0x0a /* Public */,
+      19,    1,  112,    2, 0x0a /* Public */,
+      21,    1,  115,    2, 0x0a /* Public */,
+      23,    1,  118,    2, 0x0a /* Public */,
+      25,    1,  121,    2, 0x0a /* Public */,
+      27,    1,  124,    2, 0x0a /* Public */,
+      29,    1,  127,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -93,6 +113,12 @@ static const uint qt_meta_data_GeometryRender[] = {
     QMetaType::Void, QMetaType::Double,   14,
     QMetaType::Void, QMetaType::Double,   16,
     QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, QMetaType::Float,   20,
+    QMetaType::Void, QMetaType::Float,   22,
+    QMetaType::Void, QMetaType::Float,   24,
+    QMetaType::Void, QMetaType::Double,   26,
+    QMetaType::Void, QMetaType::Double,   28,
+    QMetaType::Void, QMetaType::Double,   30,
 
        0        // eod
 };
@@ -112,6 +138,12 @@ void GeometryRender::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 6: _t->changeOblAngle((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 7: _t->changePlTop((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 8: _t->changePlFar((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->changeLightX((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 10: _t->changeLightY((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 11: _t->changeLightZ((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 12: _t->changeLightR((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 13: _t->changeLightG((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 14: _t->changeLightB((*reinterpret_cast< double(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -142,13 +174,13 @@ int GeometryRender::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 15;
     }
     return _id;
 }

@@ -95,7 +95,11 @@ private:
     Ui::Ass3Widget *ui;
 
 signals:
+
+    // Object file
     void changeFile(std::string filename);
+
+    // Projection
     void changeFOV(int fov);
     void changePFar(int d);
     void changeToPerspective();
@@ -104,5 +108,14 @@ signals:
     void changeOblAngle(double angle);
     void changePlTop(double top);
     void changePlFar(int plFar);
+
+    // Light
+    void changeLightX(float x);
+    void changeLightY(float y);
+    void changeLightZ(float z);
+
+    void changeLightR(double r);
+    void changeLightG(double g);
+    void changeLightB(double b);
 };
 

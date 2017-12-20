@@ -54,20 +54,34 @@ void GeometryRender::initialize(){
     // Corresponds to the GL calls glGetAttribLocation() and
     // glGetUniformLocation()
     locVertices = program->attributeLocation("vPosition");
+    locNormals = program->attributeLocation("vNormal");
 
 /////
-    locNormals = program->attributeLocation("vNormal");
+    loc_k_a = program->uniformLocation("k_a");
+    locLightPos = program->uniformLocation("lightPosition");
+    locAmbientLightRGB = program->uniformLocation("ambientLightRGB");
 /////
 
     locModel = program->uniformLocation("M");
     locProj = program->uniformLocation("P");
     locView = program->uniformLocation("V");
 
+/////////
+    // Initialize the light
+    ambientLight = new LightSource(QVector4D(0.0,0.0,0.0,0.0), 0.5, 0.5, 0.5);
+    program->setUniformValue(locLightPos, ambientLight->getPosition());
+    program->setUniformValue(locAmbientLightRGB, ambientLight->getRGB());
+/////////
+
     // Initialize the camera
     camera = new Camera(getAspectRatio());
-
     program->setUniformValue(locView, camera->V);
     program->setUniformValue(locProj, camera->P);
+
+////////
+    float k_a = 1.0;
+    program->setUniformValue(loc_k_a, k_a);
+////////
 
     vao.release();
     program->release();
@@ -101,7 +115,21 @@ void GeometryRender::updateCamera(){
     OpenGLWindow::displayNow();
 }
 
+// Update a light source position
+void GeometryRender::updateLightSourcePosition(){
+    program->bind();
+    program->setUniformValue(locLightPos, light->getPosition());
+    program->release();
+    OpenGLWindow::displayNow();
+}
 
+// Update the color of a light source
+void GeometryRender::updateAmbientLightSourceColor(){
+    program->bind();
+    program->setUniformValue(locAmbientLightRGB, ambientLight->getRGB());
+    program->release();
+    OpenGLWindow::displayNow();
+}
 
 // Get new object from GUI
 void GeometryRender::getNewObject(string filename){
@@ -195,7 +223,6 @@ void GeometryRender::keyPressEvent(QKeyEvent *keyEvent){
     }
 }
 
-
 // Register mouse clicks, register the position of the mouse
 void GeometryRender::mousePressEvent(QMouseEvent *mouseEvent){
     mouseClickedPos = mouseEvent->pos();
@@ -213,7 +240,6 @@ void GeometryRender::mouseMoveEvent(QMouseEvent *mouseEvent){
         updateCamera();
 
         mouseClickedPos = mouseEvent->pos();
-
     }
 }
 
@@ -242,10 +268,8 @@ void GeometryRender::loadGeometry(){
     size_t vSize = vertices.size()*sizeof(float)*3;
     size_t nSize = normals.size()*sizeof(float)*3;
 
-    ///////
-        glVertexAttribPointer(locNormals, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vSize));
-        glEnableVertexAttribArray(locNormals);
-    ///////
+    glVertexAttribPointer(locNormals, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vSize));
+    glEnableVertexAttribArray(locNormals);
 
     vBuffer.allocate(vSize + nSize);
     vBuffer.write(0, vertices.data(), vSize);
@@ -349,8 +373,41 @@ void GeometryRender::changePlFar(int plfar){
     updateCamera();
 }
 
+// Change the position of the light
+void GeometryRender::changeLightX(float x){
+    QVector4D currpos = light->getPosition();
+    light->setPosition(x,currpos[1],currpos[2],0);
+    updateLightSourcePosition();
+}
+void GeometryRender::changeLightY(float y){
+    QVector4D currpos = light->getPosition();
+    light->setPosition(currpos[0],y,currpos[2],0);
+    updateLightSourcePosition();
+}
+void GeometryRender::changeLightZ(float z){
+    QVector4D currpos = light->getPosition();
+    light->setPosition(currpos[0],currpos[1],z,0);
+    updateLightSourcePosition();
+}
+
+// Change the color of the ambient light
+void GeometryRender::changeLightR(double r){
+    ambientLight->setR(r);
+    updateAmbientLightSourceColor();
+}
+void GeometryRender::changeLightG(double g){
+    ambientLight->setG(g);
+    updateAmbientLightSourceColor();
+}
+void GeometryRender::changeLightB(double b){
+    ambientLight->setB(b);
+    updateAmbientLightSourceColor();
+}
+
+
 
 /*
+ *
   cout << "Indices\n\n";
         cout << "size: " <<vertexIndices.size() << endl;
         vector<unsigned int>::iterator it;

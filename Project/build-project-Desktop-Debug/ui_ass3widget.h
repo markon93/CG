@@ -165,18 +165,21 @@ public:
         sb_light_x->setDecimals(1);
         sb_light_x->setMinimum(-1000);
         sb_light_x->setMaximum(1000);
+        sb_light_x->setValue(0);
         sb_light_y = new QDoubleSpinBox(tab);
         sb_light_y->setObjectName(QStringLiteral("sb_light_y"));
         sb_light_y->setGeometry(QRect(30, 60, 81, 25));
         sb_light_y->setDecimals(1);
         sb_light_y->setMinimum(-1000);
         sb_light_y->setMaximum(1000);
+        sb_light_y->setValue(0.5);
         sb_light_z = new QDoubleSpinBox(tab);
         sb_light_z->setObjectName(QStringLiteral("sb_light_z"));
         sb_light_z->setGeometry(QRect(30, 90, 81, 25));
         sb_light_z->setDecimals(1);
         sb_light_z->setMinimum(-1000);
         sb_light_z->setMaximum(1000);
+        sb_light_z->setValue(5);
         lb_light_x = new QLabel(tab);
         lb_light_x->setObjectName(QStringLiteral("lb_light_x"));
         lb_light_x->setGeometry(QRect(10, 30, 16, 16));
@@ -197,6 +200,7 @@ public:
         sb_light_r->setGeometry(QRect(80, 140, 160, 18));
         sb_light_r->setFocusPolicy(Qt::NoFocus);
         sb_light_r->setMaximum(100);
+        sb_light_r->setValue(50);
         sb_light_r->setOrientation(Qt::Horizontal);
         light_r = new QLabel(tab);
         light_r->setObjectName(QStringLiteral("light_r"));
@@ -209,6 +213,7 @@ public:
         sb_light_b->setGeometry(QRect(80, 180, 160, 18));
         sb_light_b->setFocusPolicy(Qt::NoFocus);
         sb_light_b->setMaximum(100);
+        sb_light_b->setValue(50);
         sb_light_b->setOrientation(Qt::Horizontal);
         l_light_b = new QLabel(tab);
         l_light_b->setObjectName(QStringLiteral("l_light_b"));
@@ -221,6 +226,7 @@ public:
         sb_light_g->setGeometry(QRect(80, 160, 160, 18));
         sb_light_g->setFocusPolicy(Qt::NoFocus);
         sb_light_g->setMaximum(100);
+        sb_light_g->setValue(50);
         sb_light_g->setOrientation(Qt::Horizontal);
         l_light_g = new QLabel(tab);
         l_light_g->setObjectName(QStringLiteral("l_light_g"));
@@ -591,7 +597,7 @@ public:
         label->setText(QApplication::translate("Ass3Widget", "Top", Q_NULLPTR));
         label_3->setText(QApplication::translate("Ass3Widget", "Oblique scale", Q_NULLPTR));
         label_2->setText(QApplication::translate("Ass3Widget", "Far", Q_NULLPTR));
-        btn_perspective->setText(QApplication::translate("Ass3Widget", "Perspective", Q_NULLPTR));
+        btn_perspective->setText(QApplication::translate("Ass3Widget", "Perspecti&ve", Q_NULLPTR));
         label_6->setText(QApplication::translate("Ass3Widget", "Far", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("Ass3Widget", "Projection", Q_NULLPTR));
         label_texture_filename->setText(QApplication::translate("Ass3Widget", "(none)", Q_NULLPTR));

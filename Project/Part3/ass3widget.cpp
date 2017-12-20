@@ -134,28 +134,24 @@ void Ass3Widget::on_push_file_clicked(){
 // *****************************************************
 
 // *** Default light tab ***
-void Ass3Widget::on_sb_light_x_valueChanged(double x)
-{
-    cout << "Light X: " << x << endl;
+void Ass3Widget::on_sb_light_x_valueChanged(double x){
+    emit changeLightX(x);
 }
 
-void Ass3Widget::on_sb_light_y_valueChanged(double y)
-{
-    cout << "Light Y: " << y << endl;
+void Ass3Widget::on_sb_light_y_valueChanged(double y){
+    emit changeLightY(y);
 }
 
-void Ass3Widget::on_sb_light_z_valueChanged(double z)
-{
-    cout << "Light Z: " << z << endl;
+void Ass3Widget::on_sb_light_z_valueChanged(double z){
+    emit changeLightZ(z);
 }
 
-void Ass3Widget::on_sb_light_r_doubleValueChanged(double v)
-{
+void Ass3Widget::on_sb_light_r_doubleValueChanged(double v){
     if (ui->cb_light_lock->isChecked()) {
         ui->sb_light_g->setValue(v*100);
         ui->sb_light_b->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeLightR(v);
 }
 
 void Ass3Widget::on_sb_light_g_doubleValueChanged(double v)
@@ -164,7 +160,7 @@ void Ass3Widget::on_sb_light_g_doubleValueChanged(double v)
         ui->sb_light_r->setValue(v*100);
         ui->sb_light_b->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeLightG(v);
 }
 
 void Ass3Widget::on_sb_light_b_doubleValueChanged(double v)
@@ -173,7 +169,7 @@ void Ass3Widget::on_sb_light_b_doubleValueChanged(double v)
         ui->sb_light_r->setValue(v*100);
         ui->sb_light_g->setValue(v*100);
     }
-    cout << "Slider value " << v << endl;
+    emit changeLightB(v);
 }
 
 void Ass3Widget::on_sb_ambient_r_doubleValueChanged(double v)

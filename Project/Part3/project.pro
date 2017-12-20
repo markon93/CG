@@ -19,10 +19,10 @@ SOURCES +=\
     main.cpp \
     objfilereader.cpp \
     object3d.cpp \
-    ass2widget.cpp \
     camera.cpp \
     ass3widget.cpp \
-    qdoubleslider.cpp
+    qdoubleslider.cpp \
+    lightsource.cpp
 
 HEADERS  += \
     openglwindow.h \
@@ -30,13 +30,12 @@ HEADERS  += \
     3dstudio.h \
     objfilereader.h \
     object3d.h \
-    ass2widget.h \
     camera.h \
     ass3widget.h \
-    qdoubleslider.h
+    qdoubleslider.h \
+    lightsource.h
 
 FORMS    += \
-    ass2widget.ui \
     ass3widget.ui
 
 DISTFILES += \

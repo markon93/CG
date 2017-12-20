@@ -13,6 +13,7 @@
 #include "camera.h"
 #include "3dstudio.h"
 #include "openglwindow.h"
+#include "lightsource.h"
 
 using VertVec = QVector3D;
 class GeometryRender : public OpenGLWindow
@@ -37,6 +38,8 @@ private:
 
     Object3D* obj;
     Camera* camera;
+    LightSource* light;
+    LightSource* ambientLight;
 
     QPoint mouseClickedPos;
 
@@ -51,9 +54,10 @@ private:
     GLuint locView;
     GLuint locProj;
 
-//////
+    GLuint loc_k_a;
+    GLuint locLightPos;
+    GLuint locAmbientLightRGB;
     GLuint locNormals;
-/////
 
     // Geometry data
     std::vector<VertVec> vertices, normals;
@@ -64,6 +68,12 @@ private:
     void updateObj();
     void updateCamera();
     void loadGeometry();
+
+///////////
+    void updateLightSourcePosition();
+    void updateLightSourceColor();
+    void updateAmbientLightSourceColor();
+///////////
 
     OBJFileReader* reader;
 
@@ -77,5 +87,13 @@ public slots:
     void changeOblAngle(double angle);
     void changePlTop(double top);
     void changePlFar(int plfar);
+
+    void changeLightX(float x);
+    void changeLightY(float y);
+    void changeLightZ(float z);
+
+    void changeLightR(double r);
+    void changeLightG(double g);
+    void changeLightB(double b);
 };
 

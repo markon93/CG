@@ -53,28 +53,28 @@ SOURCES       = ../Part3/openglwindow.cpp \
 		../Part3/main.cpp \
 		../Part3/objfilereader.cpp \
 		../Part3/object3d.cpp \
-		../Part3/ass2widget.cpp \
 		../Part3/camera.cpp \
 		../Part3/ass3widget.cpp \
-		../Part3/qdoubleslider.cpp moc_openglwindow.cpp \
+		../Part3/qdoubleslider.cpp \
+		../Part3/lightsource.cpp moc_openglwindow.cpp \
 		moc_geometryrender.cpp \
-		moc_ass2widget.cpp \
 		moc_ass3widget.cpp \
-		moc_qdoubleslider.cpp
+		moc_qdoubleslider.cpp \
+		moc_lightsource.cpp
 OBJECTS       = openglwindow.o \
 		geometryrender.o \
 		main.o \
 		objfilereader.o \
 		object3d.o \
-		ass2widget.o \
 		camera.o \
 		ass3widget.o \
 		qdoubleslider.o \
+		lightsource.o \
 		moc_openglwindow.o \
 		moc_geometryrender.o \
-		moc_ass2widget.o \
 		moc_ass3widget.o \
-		moc_qdoubleslider.o
+		moc_qdoubleslider.o \
+		moc_lightsource.o
 DIST          = ../Part3/vshader.glsl \
 		../Part3/fshader.glsl \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -143,18 +143,18 @@ DIST          = ../Part3/vshader.glsl \
 		../Part3/3dstudio.h \
 		../Part3/objfilereader.h \
 		../Part3/object3d.h \
-		../Part3/ass2widget.h \
 		../Part3/camera.h \
 		../Part3/ass3widget.h \
-		../Part3/qdoubleslider.h ../Part3/openglwindow.cpp \
+		../Part3/qdoubleslider.h \
+		../Part3/lightsource.h ../Part3/openglwindow.cpp \
 		../Part3/geometryrender.cpp \
 		../Part3/main.cpp \
 		../Part3/objfilereader.cpp \
 		../Part3/object3d.cpp \
-		../Part3/ass2widget.cpp \
 		../Part3/camera.cpp \
 		../Part3/ass3widget.cpp \
-		../Part3/qdoubleslider.cpp
+		../Part3/qdoubleslider.cpp \
+		../Part3/lightsource.cpp
 QMAKE_TARGET  = Workshop1
 DESTDIR       = 
 TARGET        = Workshop1
@@ -163,7 +163,7 @@ TARGET        = Workshop1
 first: all
 ####### Build rules
 
-$(TARGET): ui_ass2widget.h ui_ass3widget.h $(OBJECTS)  
+$(TARGET): ui_ass3widget.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../Part3/project.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -311,9 +311,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Part3/openglwindow.h ../Part3/geometryrender.h ../Part3/3dstudio.h ../Part3/objfilereader.h ../Part3/object3d.h ../Part3/ass2widget.h ../Part3/camera.h ../Part3/ass3widget.h ../Part3/qdoubleslider.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Part3/openglwindow.cpp ../Part3/geometryrender.cpp ../Part3/main.cpp ../Part3/objfilereader.cpp ../Part3/object3d.cpp ../Part3/ass2widget.cpp ../Part3/camera.cpp ../Part3/ass3widget.cpp ../Part3/qdoubleslider.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Part3/ass2widget.ui ../Part3/ass3widget.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Part3/openglwindow.h ../Part3/geometryrender.h ../Part3/3dstudio.h ../Part3/objfilereader.h ../Part3/object3d.h ../Part3/camera.h ../Part3/ass3widget.h ../Part3/qdoubleslider.h ../Part3/lightsource.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Part3/openglwindow.cpp ../Part3/geometryrender.cpp ../Part3/main.cpp ../Part3/objfilereader.cpp ../Part3/object3d.cpp ../Part3/camera.cpp ../Part3/ass3widget.cpp ../Part3/qdoubleslider.cpp ../Part3/lightsource.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Part3/ass3widget.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -338,9 +338,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_openglwindow.cpp moc_geometryrender.cpp moc_ass2widget.cpp moc_ass3widget.cpp moc_qdoubleslider.cpp
+compiler_moc_header_make_all: moc_openglwindow.cpp moc_geometryrender.cpp moc_ass3widget.cpp moc_qdoubleslider.cpp moc_lightsource.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_openglwindow.cpp moc_geometryrender.cpp moc_ass2widget.cpp moc_ass3widget.cpp moc_qdoubleslider.cpp
+	-$(DEL_FILE) moc_openglwindow.cpp moc_geometryrender.cpp moc_ass3widget.cpp moc_qdoubleslider.cpp moc_lightsource.cpp
 moc_openglwindow.cpp: ../Part3/3dstudio.h \
 		../Part3/openglwindow.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
@@ -351,13 +351,10 @@ moc_geometryrender.cpp: ../Part3/object3d.h \
 		../Part3/3dstudio.h \
 		../Part3/camera.h \
 		../Part3/openglwindow.h \
+		../Part3/lightsource.h \
 		../Part3/geometryrender.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/oi12/oi12mnd/Desktop/CG/Project/Part3 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Part3/geometryrender.h -o moc_geometryrender.cpp
-
-moc_ass2widget.cpp: ../Part3/ass2widget.h \
-		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/oi12/oi12mnd/Desktop/CG/Project/Part3 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Part3/ass2widget.h -o moc_ass2widget.cpp
 
 moc_ass3widget.cpp: ../Part3/ass3widget.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
@@ -367,15 +364,16 @@ moc_qdoubleslider.cpp: ../Part3/qdoubleslider.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/oi12/oi12mnd/Desktop/CG/Project/Part3 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Part3/qdoubleslider.h -o moc_qdoubleslider.cpp
 
+moc_lightsource.cpp: ../Part3/3dstudio.h \
+		../Part3/lightsource.h \
+		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/oi12/oi12mnd/Desktop/CG/Project/Part3 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Part3/lightsource.h -o moc_lightsource.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_ass2widget.h ui_ass3widget.h
+compiler_uic_make_all: ui_ass3widget.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_ass2widget.h ui_ass3widget.h
-ui_ass2widget.h: ../Part3/ass2widget.ui \
-		/usr/lib/x86_64-linux-gnu/qt5/bin/uic
-	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../Part3/ass2widget.ui -o ui_ass2widget.h
-
+	-$(DEL_FILE) ui_ass3widget.h
 ui_ass3widget.h: ../Part3/ass3widget.ui \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/uic \
 		../Part3/qdoubleslider.h
@@ -400,7 +398,8 @@ geometryrender.o: ../Part3/geometryrender.cpp ../Part3/geometryrender.h \
 		../Part3/objfilereader.h \
 		../Part3/3dstudio.h \
 		../Part3/camera.h \
-		../Part3/openglwindow.h
+		../Part3/openglwindow.h \
+		../Part3/lightsource.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o geometryrender.o ../Part3/geometryrender.cpp
 
 main.o: ../Part3/main.cpp ../Part3/ass3widget.h \
@@ -409,7 +408,8 @@ main.o: ../Part3/main.cpp ../Part3/ass3widget.h \
 		../Part3/objfilereader.h \
 		../Part3/3dstudio.h \
 		../Part3/camera.h \
-		../Part3/openglwindow.h
+		../Part3/openglwindow.h \
+		../Part3/lightsource.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Part3/main.cpp
 
 objfilereader.o: ../Part3/objfilereader.cpp ../Part3/objfilereader.h
@@ -420,25 +420,20 @@ object3d.o: ../Part3/object3d.cpp ../Part3/object3d.h \
 		../Part3/3dstudio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o object3d.o ../Part3/object3d.cpp
 
-ass2widget.o: ../Part3/ass2widget.cpp ../Part3/ass2widget.h \
-		ui_ass2widget.h \
-		../Part3/geometryrender.h \
-		../Part3/object3d.h \
-		../Part3/objfilereader.h \
-		../Part3/3dstudio.h \
-		../Part3/camera.h \
-		../Part3/openglwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ass2widget.o ../Part3/ass2widget.cpp
-
 camera.o: ../Part3/camera.cpp ../Part3/camera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../Part3/camera.cpp
 
 ass3widget.o: ../Part3/ass3widget.cpp ../Part3/ass3widget.h \
-		ui_ass3widget.h
+		ui_ass3widget.h \
+		../Part3/qdoubleslider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ass3widget.o ../Part3/ass3widget.cpp
 
 qdoubleslider.o: ../Part3/qdoubleslider.cpp ../Part3/qdoubleslider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qdoubleslider.o ../Part3/qdoubleslider.cpp
+
+lightsource.o: ../Part3/lightsource.cpp ../Part3/lightsource.h \
+		../Part3/3dstudio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lightsource.o ../Part3/lightsource.cpp
 
 moc_openglwindow.o: moc_openglwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_openglwindow.o moc_openglwindow.cpp
@@ -446,14 +441,14 @@ moc_openglwindow.o: moc_openglwindow.cpp
 moc_geometryrender.o: moc_geometryrender.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_geometryrender.o moc_geometryrender.cpp
 
-moc_ass2widget.o: moc_ass2widget.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ass2widget.o moc_ass2widget.cpp
-
 moc_ass3widget.o: moc_ass3widget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ass3widget.o moc_ass3widget.cpp
 
 moc_qdoubleslider.o: moc_qdoubleslider.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qdoubleslider.o moc_qdoubleslider.cpp
+
+moc_lightsource.o: moc_lightsource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_lightsource.o moc_lightsource.cpp
 
 ####### Install
 
