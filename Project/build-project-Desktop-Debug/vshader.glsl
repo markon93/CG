@@ -4,9 +4,13 @@ in vec3 vPosition;
 //////
 in vec3 vNormal;
 
+in vec2 texCoords;
+
 out vec3 fN;
 out vec3 fE;
 out vec3 fL;
+
+out vec2 f_texCoords;
 
 uniform vec4 lightPosition;
 //////
@@ -22,22 +26,9 @@ void main(){
         fL = lightPosition.xyz - vPosition.xyz;
     }
 
+    f_texCoords = texCoords;
+
     gl_Position = P*V*M*vec4(vPosition, 1.0);
-
-    ///////
-   // vec4 r = 2*(vNormal*l)*vNormal - l;
-
-//    vec4 h = l + v;
-//    h = normalize(h);
-
-//    vec4 I_ambient = I_a * k_a;
-//    vec4 I_diffuse = I_l*k_d*dot(vNormal,l);
-//    vec4 I_specular = I_l*k_s*(pow(dot(vNormal,h),alpha));
-
-//    color = I_ambient + I_diffuse + I_specular;
-//    color.a = alpha;
-
-    ///////
 }
 
 

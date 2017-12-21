@@ -3,6 +3,8 @@ in vec3 fN;
 in vec3 fL;
 in vec3 fE;
 
+in vec2 f_texCoords;
+
 // Light properties
 uniform vec3 ambientLightRGB;
 uniform vec3 lightLuminance;
@@ -10,6 +12,8 @@ uniform vec3 lightLuminance;
 // Matrial properties
 uniform vec4 k_a, k_d, k_s;
 float alpha = 100;
+
+uniform sampler2D tex;
 
 out vec4  color;
 

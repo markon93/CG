@@ -545,7 +545,7 @@ public:
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_fov, SLOT(setEnabled(bool)));
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_pefar, SLOT(setEnabled(bool)));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Ass3Widget);
