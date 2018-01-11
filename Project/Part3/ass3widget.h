@@ -134,5 +134,7 @@ signals:
     void changeK_S_R(double r);
     void changeK_S_G(double g);
     void changeK_S_B(double b);
+
+    void changeAlpha(int phong);
 };
 

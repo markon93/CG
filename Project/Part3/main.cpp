@@ -109,6 +109,10 @@ int main(int argc, char **argv){
 
     QObject::connect(&widgets, SIGNAL(changeK_S_B(double)),
                      &window, SLOT(changeK_S_B(double)));
+
+    QObject::connect(&widgets, SIGNAL(changeAlpha(int)),
+                     &window, SLOT(changeAlpha(int)));
+
     return app.exec();
 }
 

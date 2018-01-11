@@ -10,6 +10,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QtGui/QVector3D>
 #include <object3d.h>
+#include <QOpenGLTexture>
 #include "camera.h"
 #include "3dstudio.h"
 #include "openglwindow.h"
@@ -48,6 +49,11 @@ private:
     QOpenGLBuffer vBuffer;
     QOpenGLBuffer iBuffer;
 
+/////////////////////////////////
+    GLuint locTexture;
+    GLuint locTextureImage;
+/////////////////////////////////
+
     // OpenGL attribute locations
     GLuint locVertices;
     GLuint locModel;
@@ -60,17 +66,23 @@ private:
     GLuint locAmbientLightRGB;
     GLuint locLightLuminance;
 
+    GLuint locAlpha;
+
     // Geometry data
     std::vector<VertVec> vertices, normals;
     std::vector<unsigned int> vertexIndices;
     std::vector<VertVec> castVecVec2VertVec(std::vector<std::vector<float>> vertices);
+    std::vector<VertVec> castVecVec2VertVec_test(std::vector<std::vector<float>> vertices);
     std::vector<float> castVec3D2Vec(QVector3D vec);
+
+    // Texture data
+    std::vector<QVector2D> texCoords;
 
     void updateObj();
     void updateCamera();
     void loadGeometry();
+    void loadGeometryOld();
 
-///////////
     void updateLightSourcePosition();
     void updateLightLuminance();
     void updateAmbientLightSourceColor();
@@ -78,7 +90,11 @@ private:
     void updateMaterialAmbience();
     void updateMaterialDiffusivity();
     void updateMaterialSpecularity();
-///////////
+
+    void updateAlpha();
+
+    void applyTexture();
+    bool textureIsApplied;
 
     OBJFileReader* reader;
 
@@ -117,5 +133,7 @@ public slots:
     void changeK_S_R(double r);
     void changeK_S_G(double g);
     void changeK_S_B(double b);
+
+    void changeAlpha(int alpha);
 };
 

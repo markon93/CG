@@ -9,7 +9,9 @@
 #include <iostream>
 #include <string>
 #include <QApplication>
+#include <QOpenGLTexture>
 #include <math.h>
+#include <QOpenGLWidget>
 #include "geometryrender.h"
 #include "objfilereader.h"
 using namespace std;
@@ -17,7 +19,8 @@ using namespace std;
 GeometryRender::GeometryRender()
     : vao(0)
     , vBuffer(QOpenGLBuffer::VertexBuffer)
-    , iBuffer(QOpenGLBuffer::IndexBuffer){
+    , iBuffer(QOpenGLBuffer::IndexBuffer)
+{
 }
 
 // Initialize OpenGL
@@ -30,54 +33,58 @@ void GeometryRender::initialize(){
     // Create and initialize a program object with shaders
     program = initProgram(this, "vshader.glsl", "fshader.glsl");
 
-    // Installs the program object as part of current rendering state
-    // Corresponds to the GL call glUseProgram()
+    // Install the program object as part of current rendering state
     program->bind();
 
-    // Creat a vertex array object
-    // Corresponds to the GL calls glGenVertexArrays() and glBindVertexArray()
+    // Create a vertex array object
     vao.create();
     vao.bind();
 
-    // Create vertex buffer in the shared display list space and
-    // bind it as VertexBuffer (GL_ARRAY_BUFFER)
-    // Corresponds to the GL calls glGenBuffers() and glBindBuffer()
+    // Create vertex buffer
     vBuffer.create();
     vBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
     vBuffer.bind();
 
+    // Create index buffer
     iBuffer.create();
     iBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
     iBuffer.bind();
 
-    // Get locations of the attributes in the shader
-    // Corresponds to the GL calls glGetAttribLocation() and
-    // glGetUniformLocation()
+    /* Get locations of the attributes and uniform values in the shaders */
+
+    // Vertices, normals, texture coordinates & texture image
     locVertices = program->attributeLocation("vPosition");
     locNormals = program->attributeLocation("vNormal");
 
-/////
+
+
+//////////////////////////////////////////
+    locTexture = program->attributeLocation("texCoords");
+//    locTextureImage = program->uniformLocation("tex");
+//////////////////////////////////////////
+
+
+
+    // Material parameters
     loc_k_a = program->uniformLocation("k_a");
     loc_k_d = program->uniformLocation("k_d");
     loc_k_s = program->uniformLocation("k_s");
     locLightPos = program->uniformLocation("lightPosition");
     locLightLuminance = program->uniformLocation("lightLuminance");
     locAmbientLightRGB = program->uniformLocation("ambientLightRGB");
-/////
+    locAlpha = program->uniformLocation("alpha");
 
+    // MVP matrices
     locModel = program->uniformLocation("M");
     locProj = program->uniformLocation("P");
     locView = program->uniformLocation("V");
 
-/////////
-    // Initialize the light
+    // Initialize light sources
     ambientLight = new LightSource(QVector4D(0.0,0.0,0.0,0.0), 0.2, 0.2, 0.2);
     program->setUniformValue(locAmbientLightRGB, ambientLight->getRGB());
-
     light = new LightSource(QVector4D(0.0,1.0,5.0,1.0), 0.7, 0.7, 0.7);
     program->setUniformValue(locLightPos, light->getPosition());
     program->setUniformValue(locLightLuminance, light->getRGB());
-/////////
 
     // Initialize the camera
     camera = new Camera(getAspectRatio());
@@ -88,18 +95,23 @@ void GeometryRender::initialize(){
     reader = new OBJFileReader();
     obj = new Object3D();
 
-///////////
     // Initialize the material
     program->setUniformValue(loc_k_a, obj->getK_A());
     program->setUniformValue(loc_k_d, obj->getK_D());
     program->setUniformValue(loc_k_s, obj->getK_S());
-///////////
+    program->setUniformValue(locAlpha, obj->getAlpha());
 
+    // Initialize object properties
     obj->setVertices(reader->getVertices());
     obj->setVertexIndices(reader->getVertexIndices());
     obj->setTriangulation(reader->getTriangulation());
-    obj->setTextures(reader->getTextures());
     obj->setNormals(reader->getVertexNormals());
+
+
+//////////////////////////////////////////
+//    program->setUniformValue("tex", locTextureImage);
+    applyTexture();
+//////////////////////////////////////////
 
     vao.release();
     program->release();
@@ -168,6 +180,14 @@ void GeometryRender::updateMaterialDiffusivity(){
 void GeometryRender::updateMaterialSpecularity(){
     program->bind();
     program->setUniformValue(loc_k_s, obj->getK_S());
+    program->release();
+    OpenGLWindow::displayNow();
+}
+
+// Update the shininess factor of the material
+void GeometryRender::updateAlpha(){
+    program->bind();
+    program->setUniformValue(locAlpha, obj->getAlpha());
     program->release();
     OpenGLWindow::displayNow();
 }
@@ -284,47 +304,6 @@ void GeometryRender::mouseMoveEvent(QMouseEvent *mouseEvent){
     }
 }
 
-void GeometryRender::loadGeometry(){
-    program->bind();
-    vao.bind();
-
-    // Set the pointers of locVertices_ to the right places
-    // Can also call program_->setAttributeBuffer() but then the values are normalized
-    glVertexAttribPointer(locVertices, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(locVertices);
-
-    program->setUniformValue(locModel, obj->matModel);
-    vector<vector<float>> tempVertices = obj->getVertices();
-////////////
-    vector<vector<float>> tempNormals = obj->getNormals();
-/////////////
-
-    vertices = castVecVec2VertVec(tempVertices);
-    normals = castVecVec2VertVec(tempNormals);
-
-    vertexIndices = obj->getVertexIndices();
-
-    // Load data to the array buffer
-    // Corresponds to the GL call glBufferData()
-    size_t vSize = vertices.size()*sizeof(float)*3;
-    size_t nSize = normals.size()*sizeof(float)*3;
-
-    glVertexAttribPointer(locNormals, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vSize));
-    glEnableVertexAttribArray(locNormals);
-
-    vBuffer.allocate(vSize + nSize);
-    vBuffer.write(0, vertices.data(), vSize);
-    vBuffer.write(vSize, normals.data(), nSize);
-
-    size_t iSize = vertexIndices.size()*sizeof(unsigned int);
-
-    iBuffer.allocate(iSize);
-    iBuffer.write(0, vertexIndices.data(), iSize);
-
-    vao.release();
-    program->release();
-}
-
 /* Transform a vector of vectors to a vector with VertVecs */
 vector<VertVec> GeometryRender::castVecVec2VertVec(vector<vector<float>> vec){
     vector<VertVec> newVec;
@@ -349,10 +328,11 @@ vector<float> GeometryRender::castVec3D2Vec(QVector3D vec){
 void GeometryRender::display(){
     program->bind();
     vao.bind();
-
+    glBindTexture ( GL_TEXTURE_2D , locTextureImage );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDrawElements(GL_TRIANGLES, vertexIndices.size(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
     glFlush();
+    glBindTexture (GL_TEXTURE_2D, 0);
 
     vao.release();
     program->release();
@@ -499,31 +479,109 @@ void GeometryRender::changeK_S_B(double b){
     updateMaterialSpecularity();
 }
 
+void GeometryRender::changeAlpha(int alpha){
+    obj->setAlpha(alpha);
+    updateAlpha();
+}
 
-/*
- *
-  cout << "Indices\n\n";
-        cout << "size: " <<vertexIndices.size() << endl;
-        vector<unsigned int>::iterator it;
-        for (it = vertexIndices.begin(); it != vertexIndices.end(); it++){
-            cout << *it;
-            cout << endl;
+
+//////////////////////////////////////////
+/* Apply  texture */
+void GeometryRender::applyTexture(){
+
+    QImage image;
+
+    // Define the image for openGL
+    if(image.load("/home/oi12/oi12mnd/Desktop/CG/Project/build-project-Desktop-Debug/bricks.bmp","BMP")) {
+        cout << "ERER\n";
+    }
+
+    glGenTextures(1, &locTextureImage);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, locTextureImage);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(),
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, image.constBits());
+
+    // Wrapping
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // Filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Generate mipmaps
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glBindTexture (GL_TEXTURE_2D, 0);
+
+}
+//////////////////////////////////////////
+
+
+
+void GeometryRender::loadGeometry(){
+    program->bind();
+    vao.bind();
+
+    // Get object vertices, normals, texture coordinates etc
+    program->setUniformValue(locModel, obj->matModel);
+    vector<vector<float>> tempVertices = obj->getVertices();
+    vector<vector<float>> tempNormals = obj->getNormals();
+    vertices = castVecVec2VertVec(tempVertices);
+    normals = castVecVec2VertVec(tempNormals);
+    texCoords = obj->generateTextureCoords();
+    vertexIndices = obj->getVertexIndices();
+
+    // Find the sizes of the buffers
+    size_t vSize = vertices.size()*sizeof(VertVec);
+    size_t nSize = normals.size()*sizeof(VertVec);
+
+//////////////////////////////////////////
+    size_t texSize = texCoords.size()*sizeof(QVector2D);
+//////////////////////////////////////////
+
+    cout << texCoords.size() << endl;
+
+    for(int i = 0; i < texCoords.size(); i++){
+        for(int j = 0; j < 2; j++){
+        cout << " " <<  texCoords[i][j];
         }
-
-        cout <<endl;
-        cout << "Vertices" << endl << endl;
-
-        cout << "size: " << vertices.size() << endl;
-        vector<VertVec>::iterator IT;
-        for (IT = vertices.begin(); IT != vertices.end(); IT++){
-            VertVec row = *IT;
-            cout << row[0] << " " << row[1] << " " << row[2];
-            cout << endl;
-        }
-*/
+        cout << endl;
+    }
 
 
 
+    // Set the pointers of locVertices, locNormals and locTexture to the right places
+    glVertexAttribPointer(locVertices, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(locVertices);
+
+    glVertexAttribPointer(locNormals, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vSize));
+    glEnableVertexAttribArray(locNormals);
+
+//////////////////////////////////////////
+    glVertexAttribPointer(locTexture, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vSize + nSize));
+    glEnableVertexAttribArray(locTexture);
+//////////////////////////////////////////
+
+
+//////////////////////////////////////////
+    // Write data to buffers
+    vBuffer.allocate(vSize + nSize + texSize);
+    vBuffer.write(0, vertices.data(), vSize);
+    vBuffer.write(vSize, normals.data(), nSize);
+    vBuffer.write(vSize+nSize, texCoords.data(), texSize);
+//////////////////////////////////////////
+
+    // Vertex indices
+    size_t iSize = vertexIndices.size()*sizeof(unsigned int);
+    iBuffer.allocate(iSize);
+    iBuffer.write(0, vertexIndices.data(), iSize);
+
+    vao.release();
+    program->release();
+}
 
 
 

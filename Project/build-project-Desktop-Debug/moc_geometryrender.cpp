@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GeometryRender_t {
-    QByteArrayData data[43];
-    char stringdata0[475];
+    QByteArrayData data[45];
+    char stringdata0[493];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -71,7 +71,9 @@ QT_MOC_LITERAL(38, 415, 11), // "changeK_D_G"
 QT_MOC_LITERAL(39, 427, 11), // "changeK_D_B"
 QT_MOC_LITERAL(40, 439, 11), // "changeK_S_R"
 QT_MOC_LITERAL(41, 451, 11), // "changeK_S_G"
-QT_MOC_LITERAL(42, 463, 11) // "changeK_S_B"
+QT_MOC_LITERAL(42, 463, 11), // "changeK_S_B"
+QT_MOC_LITERAL(43, 475, 11), // "changeAlpha"
+QT_MOC_LITERAL(44, 487, 5) // "alpha"
 
     },
     "GeometryRender\0changeFOV\0\0fov\0changePFar\0"
@@ -86,7 +88,8 @@ QT_MOC_LITERAL(42, 463, 11) // "changeK_S_B"
     "changeAmbientLightG\0changeAmbientLightB\0"
     "changeK_A_R\0changeK_A_G\0changeK_A_B\0"
     "changeK_D_R\0changeK_D_G\0changeK_D_B\0"
-    "changeK_S_R\0changeK_S_G\0changeK_S_B"
+    "changeK_S_R\0changeK_S_G\0changeK_S_B\0"
+    "changeAlpha\0alpha"
 };
 #undef QT_MOC_LITERAL
 
@@ -96,7 +99,7 @@ static const uint qt_meta_data_GeometryRender[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      27,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -104,33 +107,34 @@ static const uint qt_meta_data_GeometryRender[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  149,    2, 0x0a /* Public */,
-       4,    1,  152,    2, 0x0a /* Public */,
-       6,    1,  155,    2, 0x0a /* Public */,
-       9,    0,  158,    2, 0x0a /* Public */,
-      10,    0,  159,    2, 0x0a /* Public */,
-      11,    1,  160,    2, 0x0a /* Public */,
-      13,    1,  163,    2, 0x0a /* Public */,
-      15,    1,  166,    2, 0x0a /* Public */,
-      17,    1,  169,    2, 0x0a /* Public */,
-      19,    1,  172,    2, 0x0a /* Public */,
-      21,    1,  175,    2, 0x0a /* Public */,
-      23,    1,  178,    2, 0x0a /* Public */,
-      25,    1,  181,    2, 0x0a /* Public */,
-      27,    1,  184,    2, 0x0a /* Public */,
-      29,    1,  187,    2, 0x0a /* Public */,
-      31,    1,  190,    2, 0x0a /* Public */,
-      32,    1,  193,    2, 0x0a /* Public */,
-      33,    1,  196,    2, 0x0a /* Public */,
-      34,    1,  199,    2, 0x0a /* Public */,
-      35,    1,  202,    2, 0x0a /* Public */,
-      36,    1,  205,    2, 0x0a /* Public */,
-      37,    1,  208,    2, 0x0a /* Public */,
-      38,    1,  211,    2, 0x0a /* Public */,
-      39,    1,  214,    2, 0x0a /* Public */,
-      40,    1,  217,    2, 0x0a /* Public */,
-      41,    1,  220,    2, 0x0a /* Public */,
-      42,    1,  223,    2, 0x0a /* Public */,
+       1,    1,  154,    2, 0x0a /* Public */,
+       4,    1,  157,    2, 0x0a /* Public */,
+       6,    1,  160,    2, 0x0a /* Public */,
+       9,    0,  163,    2, 0x0a /* Public */,
+      10,    0,  164,    2, 0x0a /* Public */,
+      11,    1,  165,    2, 0x0a /* Public */,
+      13,    1,  168,    2, 0x0a /* Public */,
+      15,    1,  171,    2, 0x0a /* Public */,
+      17,    1,  174,    2, 0x0a /* Public */,
+      19,    1,  177,    2, 0x0a /* Public */,
+      21,    1,  180,    2, 0x0a /* Public */,
+      23,    1,  183,    2, 0x0a /* Public */,
+      25,    1,  186,    2, 0x0a /* Public */,
+      27,    1,  189,    2, 0x0a /* Public */,
+      29,    1,  192,    2, 0x0a /* Public */,
+      31,    1,  195,    2, 0x0a /* Public */,
+      32,    1,  198,    2, 0x0a /* Public */,
+      33,    1,  201,    2, 0x0a /* Public */,
+      34,    1,  204,    2, 0x0a /* Public */,
+      35,    1,  207,    2, 0x0a /* Public */,
+      36,    1,  210,    2, 0x0a /* Public */,
+      37,    1,  213,    2, 0x0a /* Public */,
+      38,    1,  216,    2, 0x0a /* Public */,
+      39,    1,  219,    2, 0x0a /* Public */,
+      40,    1,  222,    2, 0x0a /* Public */,
+      41,    1,  225,    2, 0x0a /* Public */,
+      42,    1,  228,    2, 0x0a /* Public */,
+      43,    1,  231,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -160,6 +164,7 @@ static const uint qt_meta_data_GeometryRender[] = {
     QMetaType::Void, QMetaType::Double,   26,
     QMetaType::Void, QMetaType::Double,   28,
     QMetaType::Void, QMetaType::Double,   30,
+    QMetaType::Void, QMetaType::Int,   44,
 
        0        // eod
 };
@@ -197,6 +202,7 @@ void GeometryRender::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 24: _t->changeK_S_R((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 25: _t->changeK_S_G((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 26: _t->changeK_S_B((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 27: _t->changeAlpha((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -227,13 +233,13 @@ int GeometryRender::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 28;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 28)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 27;
+        _id -= 28;
     }
     return _id;
 }

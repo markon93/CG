@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Ass3Widget_t {
-    QByteArrayData data[78];
-    char stringdata0[1422];
+    QByteArrayData data[79];
+    char stringdata0[1434];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -72,41 +72,42 @@ QT_MOC_LITERAL(39, 421, 11), // "changeK_D_B"
 QT_MOC_LITERAL(40, 433, 11), // "changeK_S_R"
 QT_MOC_LITERAL(41, 445, 11), // "changeK_S_G"
 QT_MOC_LITERAL(42, 457, 11), // "changeK_S_B"
-QT_MOC_LITERAL(43, 469, 23), // "on_btn_parallel_clicked"
-QT_MOC_LITERAL(44, 493, 26), // "on_btn_perspective_clicked"
-QT_MOC_LITERAL(45, 520, 24), // "on_spin_top_valueChanged"
-QT_MOC_LITERAL(46, 545, 26), // "on_spin_plfar_valueChanged"
-QT_MOC_LITERAL(47, 572, 5), // "plfar"
-QT_MOC_LITERAL(48, 578, 29), // "on_spin_oblscale_valueChanged"
-QT_MOC_LITERAL(49, 608, 29), // "on_spin_oblangle_valueChanged"
-QT_MOC_LITERAL(50, 638, 24), // "on_spin_fov_valueChanged"
-QT_MOC_LITERAL(51, 663, 26), // "on_spin_pefar_valueChanged"
-QT_MOC_LITERAL(52, 690, 5), // "pefar"
-QT_MOC_LITERAL(53, 696, 20), // "on_push_file_clicked"
-QT_MOC_LITERAL(54, 717, 26), // "on_sb_light_x_valueChanged"
-QT_MOC_LITERAL(55, 744, 26), // "on_sb_light_y_valueChanged"
-QT_MOC_LITERAL(56, 771, 26), // "on_sb_light_z_valueChanged"
-QT_MOC_LITERAL(57, 798, 32), // "on_sb_light_r_doubleValueChanged"
-QT_MOC_LITERAL(58, 831, 1), // "v"
-QT_MOC_LITERAL(59, 833, 32), // "on_sb_light_g_doubleValueChanged"
-QT_MOC_LITERAL(60, 866, 32), // "on_sb_light_b_doubleValueChanged"
-QT_MOC_LITERAL(61, 899, 34), // "on_sb_ambient_r_doubleValueCh..."
-QT_MOC_LITERAL(62, 934, 34), // "on_sb_ambient_g_doubleValueCh..."
-QT_MOC_LITERAL(63, 969, 34), // "on_sb_ambient_b_doubleValueCh..."
-QT_MOC_LITERAL(64, 1004, 36), // "on_sb_ambient_c_r_doubleValue..."
-QT_MOC_LITERAL(65, 1041, 36), // "on_sb_ambient_c_g_doubleValue..."
-QT_MOC_LITERAL(66, 1078, 36), // "on_sb_ambient_c_b_doubleValue..."
-QT_MOC_LITERAL(67, 1115, 34), // "on_sb_diffuse_r_doubleValueCh..."
-QT_MOC_LITERAL(68, 1150, 34), // "on_sb_diffuse_g_doubleValueCh..."
-QT_MOC_LITERAL(69, 1185, 34), // "on_sb_diffuse_b_doubleValueCh..."
-QT_MOC_LITERAL(70, 1220, 35), // "on_sb_specular_r_doubleValueC..."
-QT_MOC_LITERAL(71, 1256, 35), // "on_sb_specular_g_doubleValueC..."
-QT_MOC_LITERAL(72, 1292, 35), // "on_sb_specular_b_doubleValueC..."
-QT_MOC_LITERAL(73, 1328, 24), // "on_sb_phong_valueChanged"
-QT_MOC_LITERAL(74, 1353, 5), // "phong"
-QT_MOC_LITERAL(75, 1359, 27), // "on_push_texturefile_clicked"
-QT_MOC_LITERAL(76, 1387, 26), // "on_cb_show_texture_toggled"
-QT_MOC_LITERAL(77, 1414, 7) // "checked"
+QT_MOC_LITERAL(43, 469, 11), // "changeAlpha"
+QT_MOC_LITERAL(44, 481, 5), // "phong"
+QT_MOC_LITERAL(45, 487, 23), // "on_btn_parallel_clicked"
+QT_MOC_LITERAL(46, 511, 26), // "on_btn_perspective_clicked"
+QT_MOC_LITERAL(47, 538, 24), // "on_spin_top_valueChanged"
+QT_MOC_LITERAL(48, 563, 26), // "on_spin_plfar_valueChanged"
+QT_MOC_LITERAL(49, 590, 5), // "plfar"
+QT_MOC_LITERAL(50, 596, 29), // "on_spin_oblscale_valueChanged"
+QT_MOC_LITERAL(51, 626, 29), // "on_spin_oblangle_valueChanged"
+QT_MOC_LITERAL(52, 656, 24), // "on_spin_fov_valueChanged"
+QT_MOC_LITERAL(53, 681, 26), // "on_spin_pefar_valueChanged"
+QT_MOC_LITERAL(54, 708, 5), // "pefar"
+QT_MOC_LITERAL(55, 714, 20), // "on_push_file_clicked"
+QT_MOC_LITERAL(56, 735, 26), // "on_sb_light_x_valueChanged"
+QT_MOC_LITERAL(57, 762, 26), // "on_sb_light_y_valueChanged"
+QT_MOC_LITERAL(58, 789, 26), // "on_sb_light_z_valueChanged"
+QT_MOC_LITERAL(59, 816, 32), // "on_sb_light_r_doubleValueChanged"
+QT_MOC_LITERAL(60, 849, 1), // "v"
+QT_MOC_LITERAL(61, 851, 32), // "on_sb_light_g_doubleValueChanged"
+QT_MOC_LITERAL(62, 884, 32), // "on_sb_light_b_doubleValueChanged"
+QT_MOC_LITERAL(63, 917, 34), // "on_sb_ambient_r_doubleValueCh..."
+QT_MOC_LITERAL(64, 952, 34), // "on_sb_ambient_g_doubleValueCh..."
+QT_MOC_LITERAL(65, 987, 34), // "on_sb_ambient_b_doubleValueCh..."
+QT_MOC_LITERAL(66, 1022, 36), // "on_sb_ambient_c_r_doubleValue..."
+QT_MOC_LITERAL(67, 1059, 36), // "on_sb_ambient_c_g_doubleValue..."
+QT_MOC_LITERAL(68, 1096, 36), // "on_sb_ambient_c_b_doubleValue..."
+QT_MOC_LITERAL(69, 1133, 34), // "on_sb_diffuse_r_doubleValueCh..."
+QT_MOC_LITERAL(70, 1168, 34), // "on_sb_diffuse_g_doubleValueCh..."
+QT_MOC_LITERAL(71, 1203, 34), // "on_sb_diffuse_b_doubleValueCh..."
+QT_MOC_LITERAL(72, 1238, 35), // "on_sb_specular_r_doubleValueC..."
+QT_MOC_LITERAL(73, 1274, 35), // "on_sb_specular_g_doubleValueC..."
+QT_MOC_LITERAL(74, 1310, 35), // "on_sb_specular_b_doubleValueC..."
+QT_MOC_LITERAL(75, 1346, 24), // "on_sb_phong_valueChanged"
+QT_MOC_LITERAL(76, 1371, 27), // "on_push_texturefile_clicked"
+QT_MOC_LITERAL(77, 1399, 26), // "on_cb_show_texture_toggled"
+QT_MOC_LITERAL(78, 1426, 7) // "checked"
 
     },
     "Ass3Widget\0changeFile\0\0std::string\0"
@@ -122,7 +123,7 @@ QT_MOC_LITERAL(77, 1414, 7) // "checked"
     "changeK_A_R\0changeK_A_G\0changeK_A_B\0"
     "changeK_D_R\0changeK_D_G\0changeK_D_B\0"
     "changeK_S_R\0changeK_S_G\0changeK_S_B\0"
-    "on_btn_parallel_clicked\0"
+    "changeAlpha\0phong\0on_btn_parallel_clicked\0"
     "on_btn_perspective_clicked\0"
     "on_spin_top_valueChanged\0"
     "on_spin_plfar_valueChanged\0plfar\0"
@@ -148,7 +149,7 @@ QT_MOC_LITERAL(77, 1414, 7) // "checked"
     "on_sb_specular_r_doubleValueChanged\0"
     "on_sb_specular_g_doubleValueChanged\0"
     "on_sb_specular_b_doubleValueChanged\0"
-    "on_sb_phong_valueChanged\0phong\0"
+    "on_sb_phong_valueChanged\0"
     "on_push_texturefile_clicked\0"
     "on_cb_show_texture_toggled\0checked"
 };
@@ -160,73 +161,74 @@ static const uint qt_meta_data_Ass3Widget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      57,   14, // methods
+      58,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      27,       // signalCount
+      28,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  299,    2, 0x06 /* Public */,
-       5,    1,  302,    2, 0x06 /* Public */,
-       7,    1,  305,    2, 0x06 /* Public */,
-       9,    0,  308,    2, 0x06 /* Public */,
-      10,    0,  309,    2, 0x06 /* Public */,
-      11,    1,  310,    2, 0x06 /* Public */,
-      13,    1,  313,    2, 0x06 /* Public */,
-      15,    1,  316,    2, 0x06 /* Public */,
-      17,    1,  319,    2, 0x06 /* Public */,
-      19,    1,  322,    2, 0x06 /* Public */,
-      21,    1,  325,    2, 0x06 /* Public */,
-      23,    1,  328,    2, 0x06 /* Public */,
-      25,    1,  331,    2, 0x06 /* Public */,
-      27,    1,  334,    2, 0x06 /* Public */,
-      29,    1,  337,    2, 0x06 /* Public */,
-      31,    1,  340,    2, 0x06 /* Public */,
-      32,    1,  343,    2, 0x06 /* Public */,
-      33,    1,  346,    2, 0x06 /* Public */,
-      34,    1,  349,    2, 0x06 /* Public */,
-      35,    1,  352,    2, 0x06 /* Public */,
-      36,    1,  355,    2, 0x06 /* Public */,
-      37,    1,  358,    2, 0x06 /* Public */,
-      38,    1,  361,    2, 0x06 /* Public */,
-      39,    1,  364,    2, 0x06 /* Public */,
-      40,    1,  367,    2, 0x06 /* Public */,
-      41,    1,  370,    2, 0x06 /* Public */,
-      42,    1,  373,    2, 0x06 /* Public */,
+       1,    1,  304,    2, 0x06 /* Public */,
+       5,    1,  307,    2, 0x06 /* Public */,
+       7,    1,  310,    2, 0x06 /* Public */,
+       9,    0,  313,    2, 0x06 /* Public */,
+      10,    0,  314,    2, 0x06 /* Public */,
+      11,    1,  315,    2, 0x06 /* Public */,
+      13,    1,  318,    2, 0x06 /* Public */,
+      15,    1,  321,    2, 0x06 /* Public */,
+      17,    1,  324,    2, 0x06 /* Public */,
+      19,    1,  327,    2, 0x06 /* Public */,
+      21,    1,  330,    2, 0x06 /* Public */,
+      23,    1,  333,    2, 0x06 /* Public */,
+      25,    1,  336,    2, 0x06 /* Public */,
+      27,    1,  339,    2, 0x06 /* Public */,
+      29,    1,  342,    2, 0x06 /* Public */,
+      31,    1,  345,    2, 0x06 /* Public */,
+      32,    1,  348,    2, 0x06 /* Public */,
+      33,    1,  351,    2, 0x06 /* Public */,
+      34,    1,  354,    2, 0x06 /* Public */,
+      35,    1,  357,    2, 0x06 /* Public */,
+      36,    1,  360,    2, 0x06 /* Public */,
+      37,    1,  363,    2, 0x06 /* Public */,
+      38,    1,  366,    2, 0x06 /* Public */,
+      39,    1,  369,    2, 0x06 /* Public */,
+      40,    1,  372,    2, 0x06 /* Public */,
+      41,    1,  375,    2, 0x06 /* Public */,
+      42,    1,  378,    2, 0x06 /* Public */,
+      43,    1,  381,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      43,    0,  376,    2, 0x08 /* Private */,
-      44,    0,  377,    2, 0x08 /* Private */,
-      45,    1,  378,    2, 0x08 /* Private */,
-      46,    1,  381,    2, 0x08 /* Private */,
-      48,    1,  384,    2, 0x08 /* Private */,
-      49,    1,  387,    2, 0x08 /* Private */,
-      50,    1,  390,    2, 0x08 /* Private */,
-      51,    1,  393,    2, 0x08 /* Private */,
-      53,    0,  396,    2, 0x08 /* Private */,
-      54,    1,  397,    2, 0x08 /* Private */,
-      55,    1,  400,    2, 0x08 /* Private */,
-      56,    1,  403,    2, 0x08 /* Private */,
-      57,    1,  406,    2, 0x08 /* Private */,
-      59,    1,  409,    2, 0x08 /* Private */,
-      60,    1,  412,    2, 0x08 /* Private */,
-      61,    1,  415,    2, 0x08 /* Private */,
-      62,    1,  418,    2, 0x08 /* Private */,
-      63,    1,  421,    2, 0x08 /* Private */,
-      64,    1,  424,    2, 0x08 /* Private */,
-      65,    1,  427,    2, 0x08 /* Private */,
-      66,    1,  430,    2, 0x08 /* Private */,
-      67,    1,  433,    2, 0x08 /* Private */,
-      68,    1,  436,    2, 0x08 /* Private */,
-      69,    1,  439,    2, 0x08 /* Private */,
-      70,    1,  442,    2, 0x08 /* Private */,
-      71,    1,  445,    2, 0x08 /* Private */,
-      72,    1,  448,    2, 0x08 /* Private */,
-      73,    1,  451,    2, 0x08 /* Private */,
-      75,    0,  454,    2, 0x08 /* Private */,
-      76,    1,  455,    2, 0x08 /* Private */,
+      45,    0,  384,    2, 0x08 /* Private */,
+      46,    0,  385,    2, 0x08 /* Private */,
+      47,    1,  386,    2, 0x08 /* Private */,
+      48,    1,  389,    2, 0x08 /* Private */,
+      50,    1,  392,    2, 0x08 /* Private */,
+      51,    1,  395,    2, 0x08 /* Private */,
+      52,    1,  398,    2, 0x08 /* Private */,
+      53,    1,  401,    2, 0x08 /* Private */,
+      55,    0,  404,    2, 0x08 /* Private */,
+      56,    1,  405,    2, 0x08 /* Private */,
+      57,    1,  408,    2, 0x08 /* Private */,
+      58,    1,  411,    2, 0x08 /* Private */,
+      59,    1,  414,    2, 0x08 /* Private */,
+      61,    1,  417,    2, 0x08 /* Private */,
+      62,    1,  420,    2, 0x08 /* Private */,
+      63,    1,  423,    2, 0x08 /* Private */,
+      64,    1,  426,    2, 0x08 /* Private */,
+      65,    1,  429,    2, 0x08 /* Private */,
+      66,    1,  432,    2, 0x08 /* Private */,
+      67,    1,  435,    2, 0x08 /* Private */,
+      68,    1,  438,    2, 0x08 /* Private */,
+      69,    1,  441,    2, 0x08 /* Private */,
+      70,    1,  444,    2, 0x08 /* Private */,
+      71,    1,  447,    2, 0x08 /* Private */,
+      72,    1,  450,    2, 0x08 /* Private */,
+      73,    1,  453,    2, 0x08 /* Private */,
+      74,    1,  456,    2, 0x08 /* Private */,
+      75,    1,  459,    2, 0x08 /* Private */,
+      76,    0,  462,    2, 0x08 /* Private */,
+      77,    1,  463,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -256,38 +258,39 @@ static const uint qt_meta_data_Ass3Widget[] = {
     QMetaType::Void, QMetaType::Double,   26,
     QMetaType::Void, QMetaType::Double,   28,
     QMetaType::Void, QMetaType::Double,   30,
+    QMetaType::Void, QMetaType::Int,   44,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Double,   16,
-    QMetaType::Void, QMetaType::Int,   47,
+    QMetaType::Void, QMetaType::Int,   49,
     QMetaType::Void, QMetaType::Double,   12,
     QMetaType::Void, QMetaType::Double,   14,
     QMetaType::Void, QMetaType::Int,    6,
-    QMetaType::Void, QMetaType::Int,   52,
+    QMetaType::Void, QMetaType::Int,   54,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Double,   20,
     QMetaType::Void, QMetaType::Double,   22,
     QMetaType::Void, QMetaType::Double,   24,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Double,   58,
-    QMetaType::Void, QMetaType::Int,   74,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Double,   60,
+    QMetaType::Void, QMetaType::Int,   44,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   77,
+    QMetaType::Void, QMetaType::Bool,   78,
 
        0        // eod
 };
@@ -325,36 +328,37 @@ void Ass3Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 24: _t->changeK_S_R((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 25: _t->changeK_S_G((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 26: _t->changeK_S_B((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 27: _t->on_btn_parallel_clicked(); break;
-        case 28: _t->on_btn_perspective_clicked(); break;
-        case 29: _t->on_spin_top_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 30: _t->on_spin_plfar_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 31: _t->on_spin_oblscale_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 32: _t->on_spin_oblangle_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 33: _t->on_spin_fov_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 34: _t->on_spin_pefar_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 35: _t->on_push_file_clicked(); break;
-        case 36: _t->on_sb_light_x_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 37: _t->on_sb_light_y_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 38: _t->on_sb_light_z_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 39: _t->on_sb_light_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 40: _t->on_sb_light_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 41: _t->on_sb_light_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 42: _t->on_sb_ambient_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 43: _t->on_sb_ambient_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 44: _t->on_sb_ambient_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 45: _t->on_sb_ambient_c_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 46: _t->on_sb_ambient_c_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 47: _t->on_sb_ambient_c_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 48: _t->on_sb_diffuse_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 49: _t->on_sb_diffuse_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 50: _t->on_sb_diffuse_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 51: _t->on_sb_specular_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 52: _t->on_sb_specular_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 53: _t->on_sb_specular_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 54: _t->on_sb_phong_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 55: _t->on_push_texturefile_clicked(); break;
-        case 56: _t->on_cb_show_texture_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 27: _t->changeAlpha((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->on_btn_parallel_clicked(); break;
+        case 29: _t->on_btn_perspective_clicked(); break;
+        case 30: _t->on_spin_top_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 31: _t->on_spin_plfar_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 32: _t->on_spin_oblscale_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 33: _t->on_spin_oblangle_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 34: _t->on_spin_fov_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 35: _t->on_spin_pefar_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 36: _t->on_push_file_clicked(); break;
+        case 37: _t->on_sb_light_x_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 38: _t->on_sb_light_y_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 39: _t->on_sb_light_z_valueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 40: _t->on_sb_light_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 41: _t->on_sb_light_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 42: _t->on_sb_light_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 43: _t->on_sb_ambient_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 44: _t->on_sb_ambient_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 45: _t->on_sb_ambient_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 46: _t->on_sb_ambient_c_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 47: _t->on_sb_ambient_c_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 48: _t->on_sb_ambient_c_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 49: _t->on_sb_diffuse_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 50: _t->on_sb_diffuse_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 51: _t->on_sb_diffuse_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 52: _t->on_sb_specular_r_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 53: _t->on_sb_specular_g_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 54: _t->on_sb_specular_b_doubleValueChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 55: _t->on_sb_phong_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 56: _t->on_push_texturefile_clicked(); break;
+        case 57: _t->on_cb_show_texture_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -549,6 +553,13 @@ void Ass3Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            typedef void (Ass3Widget::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Ass3Widget::changeAlpha)) {
+                *result = 27;
+                return;
+            }
+        }
     }
 }
 
@@ -577,13 +588,13 @@ int Ass3Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 57)
+        if (_id < 58)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 57;
+        _id -= 58;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 57)
+        if (_id < 58)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 57;
+        _id -= 58;
     }
     return _id;
 }
@@ -773,5 +784,12 @@ void Ass3Widget::changeK_S_B(double _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 26, _a);
+}
+
+// SIGNAL 27
+void Ass3Widget::changeAlpha(int _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 27, _a);
 }
 QT_END_MOC_NAMESPACE

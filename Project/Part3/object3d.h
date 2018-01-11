@@ -15,6 +15,8 @@ public:
     std::vector<unsigned int> getVertexIndices();
     std::vector<std::vector<float>> getTriangulation();
 
+    std::vector<QVector2D> generateTextureCoords();
+
     void setVertices(std::vector<std::vector<float>>);
     void setVertexIndices(std::vector<unsigned int>);
     void setTriangulation(std::vector<std::vector<float>>);
@@ -44,6 +46,9 @@ public:
     QVector4D getK_D();
     QVector4D getK_S();
 
+    int getAlpha();
+    void setAlpha(int alpha);
+
     QMatrix4x4 matModel;
 
     void reset();
@@ -56,6 +61,10 @@ private:
     std::vector<float> midpoint;
     void updateVertices(float dx, float dy, float dz);
     void updateMidpoint();
+
+    int alpha;
+
+    int sgn(float x);
 };
 
 #endif // OBJECT3D_H

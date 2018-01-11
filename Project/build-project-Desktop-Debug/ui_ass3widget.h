@@ -420,6 +420,7 @@ public:
         sb_phong->setGeometry(QRect(60, 280, 81, 25));
         sb_phong->setMinimum(1);
         sb_phong->setMaximum(256);
+        sb_phong->setValue(100);
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -545,7 +546,7 @@ public:
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_fov, SLOT(setEnabled(bool)));
         QObject::connect(btn_perspective, SIGNAL(toggled(bool)), spin_pefar, SLOT(setEnabled(bool)));
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Ass3Widget);

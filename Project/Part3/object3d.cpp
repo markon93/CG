@@ -1,5 +1,7 @@
 #include "object3d.h"
 #include <vector>
+#include<QVector2D>
+#include <QtMath>
 #include "objfilereader.h"
 #include <string>
 using namespace std;
@@ -9,6 +11,7 @@ Object3D::Object3D(){
     k_ambient = {0.2, 0.2, 0.2, 1.0};
     k_diffuse = {1.0, 0.8, 0.0, 1.0};
     k_specular = {1.0, 1.0, 1.0, 1.0};
+    alpha = 100;
 }
 
 /* Set the vertices of the object */
@@ -114,6 +117,57 @@ void Object3D::updateMidpoint(){
     midpoint = {aveX, aveY, aveZ};
 }
 
+///////////////////////////
+vector<QVector2D> Object3D::generateTextureCoords(){
+    vector<QVector2D> interSectionPoints;
+    for(int i = 0; i < (int)vertices.size(); i++){
+        double a = 0, b = 0, c = 0;
+        for(int j = 0; j < 3; j++){
+            a += normals[i][j]*normals[i][j];
+            b += 2*(vertices[i][j]*normals[i][j]);
+            c += vertices[i][j]*vertices[i][j] - 1;
+        }
+        double delta = b*b - 4*a*c;
+        double q = -0.5*(b + sgn(b)*sqrt(delta));
+        double d1 = q/a;
+        double d2 = c/q;
+
+        double d = max(d1, d2);
+
+        vector<float> P;
+        for(int k = 0; k < 3; k++){
+            P.push_back(vertices[i][k] + d*normals[i][k]);
+        }
+
+        // Normalize P
+        double length = 0;
+        for(int l = 0; l < 3; l++){
+            length += P[l]*P[l];
+        }
+        length = sqrt(length);
+
+        for(int l = 0; l < 3; l++){
+            P[l] /= length;
+        }
+
+        float s  = qAcos(P[0])/M_PI;
+        float t = qAtan2(P[2],P[1])/(2*M_PI) + 0.5;
+
+        QVector2D row = QVector2D(s,t);
+        interSectionPoints.push_back(row);
+    }
+    return interSectionPoints;
+}
+
+// Sign function
+int Object3D::sgn(float x){
+    if (x > 0) return 1;
+    if (x < 0) return -1;
+    return 0;
+}
+////////////////////////////
+
+
 // Set the ambient coefficient of the material
 void Object3D::setK_A_R(double k_a_r){
     this->k_ambient[0] = k_a_r;
@@ -174,7 +228,13 @@ QVector4D Object3D::getK_S(){
     return this->k_specular;
 }
 
+void Object3D::setAlpha(int alpha){
+    this->alpha = alpha;
+}
 
+int Object3D::getAlpha(){
+    return this->alpha;
+}
 
 
 

@@ -236,14 +236,12 @@ void Ass3Widget::on_sb_specular_b_doubleValueChanged(double v){
     emit changeK_S_B(v);
 }
 
-void Ass3Widget::on_sb_phong_valueChanged(int phong)
-{
-    cout << "Phong value " << phong << endl;
+void Ass3Widget::on_sb_phong_valueChanged(int phong){
+    emit changeAlpha(phong);
 }
 
 // *** Texture tab ***
-void Ass3Widget::on_push_texturefile_clicked()
-{
+void Ass3Widget::on_push_texturefile_clicked(){
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Texture Image File"), QString(),
             tr("Texture Images (*.bmp *.dds *.hdr *.pic *.png *.psd *.jpg *.tga)"));
 
