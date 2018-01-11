@@ -60,7 +60,6 @@ void GeometryRender::initialize(){
 
 //////////////////////////////////////////
     locTexture = program->attributeLocation("texCoords");
-//    locTextureImage = program->uniformLocation("tex");
 //////////////////////////////////////////
 
 
@@ -109,8 +108,9 @@ void GeometryRender::initialize(){
 
 
 //////////////////////////////////////////
-//    program->setUniformValue("tex", locTextureImage);
-    applyTexture();
+    locTextureOn = program->uniformLocation("textureIsOn");
+    program->setUniformValue(locTextureOn, false);
+    applyTexture("/home/oi12/oi12mnd/Desktop/CG/Project/build-project-Desktop-Debug/bricks.bmp");
 //////////////////////////////////////////
 
     vao.release();
@@ -328,11 +328,11 @@ vector<float> GeometryRender::castVec3D2Vec(QVector3D vec){
 void GeometryRender::display(){
     program->bind();
     vao.bind();
-    glBindTexture ( GL_TEXTURE_2D , locTextureImage );
+    glBindTexture(GL_TEXTURE_2D, locTextureImage);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDrawElements(GL_TRIANGLES, vertexIndices.size(), GL_UNSIGNED_INT, BUFFER_OFFSET(0));
     glFlush();
-    glBindTexture (GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     vao.release();
     program->release();
@@ -487,20 +487,18 @@ void GeometryRender::changeAlpha(int alpha){
 
 //////////////////////////////////////////
 /* Apply  texture */
-void GeometryRender::applyTexture(){
-
-    QImage image;
+void GeometryRender::applyTexture(string texturefilename){
 
     // Define the image for openGL
-    if(image.load("/home/oi12/oi12mnd/Desktop/CG/Project/build-project-Desktop-Debug/bricks.bmp","BMP")) {
-        cout << "ERER\n";
-    }
+    QImage image;
+    image.load(QString::fromStdString(texturefilename),"");
+
 
     glGenTextures(1, &locTextureImage);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, locTextureImage);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.width(), image.height(),
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.width(), image.height(),
                  0, GL_RGBA, GL_UNSIGNED_BYTE, image.constBits());
 
     // Wrapping
@@ -518,8 +516,24 @@ void GeometryRender::applyTexture(){
 
 }
 //////////////////////////////////////////
+void GeometryRender::activateTexture(bool active){
+    program->bind();
+    if (active){
+        glBindTexture(GL_TEXTURE_2D, locTextureImage);
+        program->setUniformValue(locTextureOn, true);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    else{
+        program->setUniformValue(locTextureOn, false);
+    }
 
+    program->release();
+    GeometryRender::displayNow();
+}
 
+void GeometryRender::changeTexture(string texturename){
+    applyTexture(texturename);
+}
 
 void GeometryRender::loadGeometry(){
     program->bind();
@@ -541,15 +555,6 @@ void GeometryRender::loadGeometry(){
 //////////////////////////////////////////
     size_t texSize = texCoords.size()*sizeof(QVector2D);
 //////////////////////////////////////////
-
-    cout << texCoords.size() << endl;
-
-    for(int i = 0; i < texCoords.size(); i++){
-        for(int j = 0; j < 2; j++){
-        cout << " " <<  texCoords[i][j];
-        }
-        cout << endl;
-    }
 
 
 

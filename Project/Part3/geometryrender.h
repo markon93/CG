@@ -52,6 +52,7 @@ private:
 /////////////////////////////////
     GLuint locTexture;
     GLuint locTextureImage;
+    GLuint locTextureOn;
 /////////////////////////////////
 
     // OpenGL attribute locations
@@ -93,7 +94,10 @@ private:
 
     void updateAlpha();
 
-    void applyTexture();
+    void applyTexture(std::string texturefilename);
+
+
+
     bool textureIsApplied;
 
     OBJFileReader* reader;
@@ -135,5 +139,8 @@ public slots:
     void changeK_S_B(double b);
 
     void changeAlpha(int alpha);
+
+    void activateTexture(bool active);
+    void changeTexture(std::string texturename);
 };
 

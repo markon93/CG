@@ -136,5 +136,8 @@ signals:
     void changeK_S_B(double b);
 
     void changeAlpha(int phong);
+
+    void activateTexture(bool active);
+    void changeTexture(std::string name);
 };
 

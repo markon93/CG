@@ -249,12 +249,10 @@ void Ass3Widget::on_push_texturefile_clicked(){
         // Get only file name (truncate path)
         QString fname = fileName.section('/', -1);
         ui->label_texture_filename->setText(fname);
-
-        cout << "Image file to open: " << fileName.toStdString() << endl;
+        emit changeTexture(fname.toStdString());
     }
 }
 
-void Ass3Widget::on_cb_show_texture_toggled(bool checked)
-{
-    cout << "Show texture? " << checked << endl;
+void Ass3Widget::on_cb_show_texture_toggled(bool checked){
+    emit activateTexture(checked);
 }

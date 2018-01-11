@@ -2,23 +2,17 @@
 in vec3 fN;
 in vec3 fL;
 in vec3 fE;
-//////////////////////////////////////////
 in vec2 f_texCoords;
-//////////////////////////////////////////
 
 // Light properties
 uniform vec3 ambientLightRGB;
 uniform vec3 lightLuminance;
+uniform bool textureIsOn;
 
 // Matrial properties
 uniform vec4 k_a, k_d, k_s;
 uniform int alpha;
-
-
-//////////////////////////////////////////
 uniform sampler2D tex;
-//////////////////////////////////////////
-
 
 out vec4  color;
 
@@ -43,10 +37,11 @@ void main(){
     // Specular light intensity
     vec4 I_specular = I_l*k_s*(pow(max(dot(NN,h),0),alpha));
 
-//////////////////////////////////////////
+    color = (I_a + I_diffuse + I_specular);
+
     // Total light intensity
-    color = (I_a + I_diffuse + I_specular)*texture2D(tex, f_texCoords);
-//////////////////////////////////////////
+    if(textureIsOn)
+        color *= texture2D(tex, f_texCoords);
 
     // Shininess
     color.a = alpha;

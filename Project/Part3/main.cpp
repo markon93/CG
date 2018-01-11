@@ -113,6 +113,13 @@ int main(int argc, char **argv){
     QObject::connect(&widgets, SIGNAL(changeAlpha(int)),
                      &window, SLOT(changeAlpha(int)));
 
+    QObject::connect(&widgets, SIGNAL(activateTexture(bool)),
+                     &window, SLOT(activateTexture(bool)));
+
+
+    QObject::connect(&widgets, SIGNAL(changeTexture(std::string)),
+                     &window, SLOT(changeTexture(std::string)));
+
     return app.exec();
 }
 
